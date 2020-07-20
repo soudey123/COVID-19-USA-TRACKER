@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>COVID-19 USA DATA TRACKER</title>
     <meta charset="utf-8">
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <!-- Load d3-annotation -->
@@ -69,6 +70,17 @@
             color: midnightblue;
             padding: 0.3px;
         }
+
+        .tooltip_bubble {
+            placement: auto;
+            position: absolute;
+            font-size: 15px;
+            width:  auto;
+            height: auto;
+            background-color: antiquewhite;
+            color: midnightblue;
+            padding: 0.3px;
+        }
         .box { height: 50px; background: #0F0; width: 100%; margin-top: 10px; }
         .container{
             width: auto;
@@ -87,7 +99,7 @@
     <h1 style="text-align:center;color:floralwhite;font-family:courier;font-size:250%">COVID-19 USA DATA TRACKER</h1>
 </div>
 <br>
-<p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%"><b style="color: purple;font-size: 20px">COVID-19 Cases USA Map:</b><br>This map shows COVID-19 cases reported by U.S. states as of 07/15/2019.Latest surge of COVID-19 cases in Texas , Arizona , Florida and Illinois reflected on the map.<br> Hover over the maps to see the following details – a) number of cases, b) number of cases per 100k population, c) number of cumulative death and d) number of deaths per 100k population reported in each jurisdiction. Legend scale on the top-left side shows the linear variation of total COVID-19 cases reported in U.S. states. </p>
+<p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%"><b style="color: purple;font-size: 20px">COVID-19 Cases USA Map:</b><br>This map shows COVID-19 cases reported by U.S. states as of 07/15/2019.Latest surge of COVID-19 cases in Texas , Arizona , Florida and Illinois reflected on the map.<br><br> Hover over the maps to see the following details – a) number of cases, b) number of cases per 100k population, c) number of cumulative death and d) number of deaths per 100k population reported in each jurisdiction. Legend scale on the top-left side shows the linear variation of total COVID-19 cases reported in U.S. states. </p>
 <div id="my_dataviz" style="background-color:#d7d4cc;color:#202c42;padding:10px;border: 5px outset #08080e" >
 </div>
 <br>
@@ -103,13 +115,13 @@
 <p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%"><b style="color: purple;font-size: 20px">Deaths By State:</b><br> The following bar plots represent the descending order of total COVID-19 deaths reported in U.S. states as of 07/15/2020. New York and New Jersey are the only two states where the total cumulative death counts surpassed 10,000.</p>
 <div id="my_dataviz2" style="background-color:#d0f3f0;color:rgba(236,241,175,0.09);padding:10px;border: 5px outset #08080e"></div>
 <br>
-<p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%"><b style="color: purple;font-size: 20px">Demographic Analysis#1:</b><br> The following interactive chart shows the cumulative COVID-19 deaths by sex and age group for the United States of 07/15/2020. Click the buttons to switch between two sets of data representation.<br> It illustrates a correlation that the COVID-19 transmitted disease is more fatal to older adults especially between age group "75-84 years" for Male and age group "85 years and above" for Female. </p>
+<p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%"><b style="color: purple;font-size: 20px">Demographic Analysis#1:</b><br> The following interactive chart shows the cumulative COVID-19 deaths by sex and age group for the United States of 07/15/2020. Click the buttons to switch between two sets of data representation.<br><br> It illustrates a correlation that the COVID-19 transmitted disease is more fatal to older adults especially between age group "75-84 years" for Male and age group "85 years and above" for Female. </p>
 <div id="my_dataviz1" style="background-color:#d7d4cc;color:#eaba98;padding:10px;border: 5px outset #08080e">
     <div><button type="button" onclick="update('Male')">Male</button>
     <button type="button" onclick="update('Female')">Female</button></div>
 </div>
 <br>
-<p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%"><b style="color: purple;font-size: 20px">Demographic Analysis#2:</b><br> The following bubble chart shows the distribution of COVID-19 deaths by race and Hispanic origin which creates an avenue to perform further analysis about the differential impact of COVID-19 deaths on these populations.</p>
+<p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%"><b style="color: purple;font-size: 20px">Demographic Analysis#2:</b><br> The following bubble chart shows the distribution of COVID-19 deaths by race and Hispanic origin which creates an avenue to perform further analysis about the differential impact of COVID-19 deaths on these populations.<br><br>Hover over the bubbles to see addition details about those demographics as such a) death distribution percentage,b) population distribution percentage. It has been observed that there is a correlation between death and population percentage. <br><br>For instance, COVID-19 fatality reported more in the White American population as compared to other minorities. It might be due to the fact that White American are the majority as they represent 60.4% of the U.S. population followed by Hispanic/Latino and Black/African American community.However, there are more COVID-19 deaths observed in the Black/African American community than that of the Hispanic/Latino though the later has higher population density as compared to the former. </p>
 <div id="my_dataviz6" style="background-color:#dafffc;color:#cfffff;padding:10px;border: 5px outset #080817"></div>
 <br>
 <p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%"><b style="color: purple;font-size: 20px">Grid View Of COVID-19 Deaths Trend By State:</b><br>The following grid chart exhibits the COVID-19 deaths trend reported in different U.S. states as of 07/15/2020. Apart from New York and New Jersey other states did not report steep rise in COVID-19 deaths so far. However, as shown in the previous chart that there is a possibility to observe similar trend in states like Texas, California, Florida, Arizona and Illinois due to the exponential increase of COVID-19 cases for past one month.<br><br>In the following grid chart , the months are represented in numeric figure on X axis e.g. Feb=2,April=4 and June=6.</p>
@@ -274,7 +286,7 @@
                 .attr("width", l_w - 100)
                 .attr("height", l_h/2)
                 .style("fill", "url(#gradient)")
-                .attr("transform", "translate(49,145)");
+                .attr("transform", "translate(49,165)");
 
 
             var y = d3.scaleLinear()
@@ -285,7 +297,7 @@
 
             key.append("g")
                 .attr("class", "y axis")
-                .attr("transform", "translate(90,145)")
+                .attr("transform", "translate(90,165)")
                 .call(yAxis)
 
         });
@@ -518,7 +530,7 @@
             {
                 note: {
 
-                    title: "NY reported highest number of COVID cases and deaths"
+                    title: "NY reported highest number of COVID-19 cases and deaths"
                 },
                 connector: {
                     end: "arrow",        // Can be none, or arrow or dot
@@ -790,12 +802,12 @@
 
 // Data is hard coded based on the information gathered from the CDC website.
     dataset = {
-        "children": [{"Name":"White","Count":64073},
-            {"Name":"Black/African American","Count":27848},
-            {"Name":"American Indian/Alaska Native","Count":974},
-            {"Name":"Asian","Count":6022},
-            {"Name":"Hispanic/Latino","Count":20849},
-            {"Name":"Other","Count":1608}]
+        "children": [{"Name":"White","Count":64073,"Death_Percentage_Distribution":52.8,"Population_Distribution":60.4},
+            {"Name":"Black/African American","Count":27848,"Death_Percentage_Distribution":22.9,"Population_Distribution":12.5},
+            {"Name":"American Indian/Alaska Native","Count":974,"Death_Percentage_Distribution":0.8,"Population_Distribution":0.7},
+            {"Name":"Asian","Count":6022,"Death_Percentage_Distribution":5,"Population_Distribution":5.7},
+            {"Name":"Hispanic/Latino","Count":20849,"Death_Percentage_Distribution":17.2,"Population_Distribution":18.3},
+            {"Name":"Other","Count":1608,"Death_Percentage_Distribution":1.3,"Population_Distribution":2.4}]
     };
 
     var diameter = 750;
@@ -836,6 +848,10 @@
         .attr("height", diameter)
         .attr("class", "bubble");
 
+     var tooltip_bubble = d3.select("#my_dataviz6").append("div")
+         .attr("class", "tooltip")
+         .style("opacity", 0);
+
     var nodes = d3.hierarchy(dataset)
         .sum(function(d) { return d.Count; });
     console.log(nodes)
@@ -854,10 +870,6 @@
             return "translate(" + d.x + "," + d.y + ")";
         });
 
-    node.append("title")
-        .text(function(d) {
-            return d.Name + ": " + d.Count;
-        });
 
     node.append("circle")
         .attr("r", function(d) {
@@ -865,7 +877,27 @@
         })
         .style("fill", function(d,i) {
             return color(i);
-        });
+        })
+        .on("mouseover", function(d) {
+            var html  = "<span><b style='color: midnightblue'> Race : </b>" + d.data.Name+ "</span><br/>" +
+                "<b style='color: darkred'> Total Deaths: <b/>" + d.data.Count+"<br/>"+
+                "<b style='color: red'> Death Distribution Percentage: <b/>" + d.data.Death_Percentage_Distribution+"<br/>"+
+                "<b style='color: darkblue'> Population Distribution Percentage: <b/>" + d.data.Population_Distribution
+
+            tooltip_bubble.html(html)
+                .style("left", (d3.event.pageX + 25) + "px")
+                .style("top", (d3.event.pageY - 28) + "px")
+                .transition()
+                .duration(200) // ms
+                .style("opacity", .9) // started as 0!
+
+        })
+
+        .on("mouseout", function(d) {
+            tooltip_bubble.transition()
+                .duration(300) // ms
+                .style("opacity", 0); // don't care about position!
+        })
 
     node.append("text")
         .attr("dy", ".2em")
@@ -877,7 +909,28 @@
         .attr("font-size", function(d){
             return d.r/5;
         })
-        .attr("fill", "white");
+        .attr("fill", "white")
+        .on("mouseover", function(d) {
+            var html  = "<span><b> Race : </b>" + d.data.Name+ "</span><br/>" +
+                "<b style='color: darkred'> Total Deaths: <b/>" + d.data.Count+"<br/>"+
+                "<b style='color: red'> Death Distribution Percentage: <b/>" + d.data.Death_Percentage_Distribution+"<br/>"+
+                "<b style='color: darkblue'> Population Distribution Percentage: <b/>" + d.data.Population_Distribution;
+
+            tooltip_bubble.html(html)
+                .style("left", (d3.event.pageX + 25) + "px")
+                .style("top", (d3.event.pageY - 28) + "px")
+                .transition()
+                .duration(200) // ms
+                .style("opacity", .9) // started as 0!
+
+        })
+
+        .on("mouseout", function(d) {
+            tooltip_bubble.transition()
+                .duration(300) // ms
+                .style("opacity", 0); // don't care about position!
+        })
+
 
     node.append("text")
         .attr("dy", "1.3em")
@@ -889,7 +942,28 @@
         .attr("font-size", function(d){
             return d.r/6;
         })
-        .attr("fill", "white");
+        .attr("fill", "white")
+        .on("mouseover", function(d) {
+            var html  = "<span><b> Race : </b>" + d.data.Name+ "</span><br/>" +
+                "<b style='color: darkred'> Total Deaths: <b/>" + d.data.Count+"<br/>"+
+                "<b style='color: red'> Death Distribution Percentage: <b/>" + d.data.Death_Percentage_Distribution+"<br/>"+
+                "<b style='color: darkblue'> Population Distribution Percentage: <b/>" + d.data.Population_Distribution;
+
+            tooltip_bubble.html(html)
+                .style("left", (d3.event.pageX + 25) + "px")
+                .style("top", (d3.event.pageY - 28) + "px")
+                .transition()
+                .duration(200) // ms
+                .style("opacity", .9) // started as 0!
+
+        })
+
+        .on("mouseout", function(d) {
+            tooltip_bubble.transition()
+                .duration(300) // ms
+                .style("opacity", 0); // don't care about position!
+        })
+
 
     d3.select(self.frameElement)
         .style("height", diameter + "px");
@@ -946,7 +1020,6 @@
         var color = d3.scaleOrdinal()
             .domain(allKeys)
             .range(['#4daf4a','#377eb8','#e41a1c','#984ea3'])
-
 
 
         //var color = d3.scaleOrdinal(d3.schemeCategory20);
