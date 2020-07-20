@@ -1,0 +1,358 @@
+﻿Month,State,Death
+1,Alaska,0
+1,Alabama,0
+1,Arkansas,0
+1,Arizona,0
+1,California,0
+1,Colorado,0
+1,Connecticut,0
+1,District Of Columbia,0
+1,Delaware,0
+1,Florida,0
+1,Georgia,0
+1,Hawaii,0
+1,Iowa,0
+1,Idaho,0
+1,Illinois,0
+1,Indiana,0
+1,Kansas,0
+1,Kentucky,0
+1,Louisiana,0
+1,Maine,0
+1,Maryland,0
+1,Massachusetts,0
+1,Michigan,0
+1,Minnesota,0
+1,Missouri,0
+1,Mississippi,0
+1,Montana,0
+1,North Carolina,0
+1,North Dakota,0
+1,Nebraska,0
+1,New Hampshire,0
+1,New Jersey,0
+1,New Mexico,0
+1,Nevada,0
+1,New York,0
+1,Ohio,0
+1,Oklahoma,0
+1,Oregon,0
+1,Pennsylvania,0
+1,Rhode Island,0
+1,South Carolina,0
+1,South Dakota,0
+1,Tennessee,0
+1,Texas,0
+1,Utah,0
+1,Virginia,0
+1,Vermont,0
+1,Washington,0
+1,Wisconsin,0
+1,West Virginia,0
+1,Wyoming,0
+2,Alaska,0
+2,Alabama,0
+2,Arkansas,0
+2,Arizona,0
+2,California,2
+2,Colorado,0
+2,Connecticut,0
+2,District Of Columbia,0
+2,Delaware,0
+2,Florida,0
+2,Georgia,0
+2,Hawaii,0
+2,Iowa,0
+2,Idaho,0
+2,Illinois,0
+2,Indiana,0
+2,Kansas,0
+2,Kentucky,0
+2,Louisiana,0
+2,Maine,0
+2,Maryland,0
+2,Massachusetts,0
+2,Michigan,0
+2,Minnesota,0
+2,Missouri,0
+2,Mississippi,0
+2,Montana,0
+2,North Carolina,0
+2,North Dakota,0
+2,Nebraska,0
+2,New Hampshire,0
+2,New Jersey,0
+2,New Mexico,0
+2,Nevada,0
+2,New York,0
+2,Ohio,0
+2,Oklahoma,0
+2,Oregon,0
+2,Pennsylvania,0
+2,Rhode Island,0
+2,South Carolina,0
+2,South Dakota,0
+2,Tennessee,0
+2,Texas,0
+2,Utah,0
+2,Virginia,0
+2,Vermont,0
+2,Washington,1
+2,Wisconsin,0
+2,West Virginia,0
+2,Wyoming,0
+3,Alaska,3
+3,Alabama,13
+3,Arkansas,8
+3,Arizona,24
+3,California,185
+3,Colorado,69
+3,Connecticut,69
+3,District Of Columbia,11
+3,Delaware,10
+3,Florida,85
+3,Georgia,125
+3,Hawaii,1
+3,Iowa,7
+3,Idaho,9
+3,Illinois,99
+3,Indiana,90
+3,Kansas,10
+3,Kentucky,18
+3,Louisiana,238
+3,Maine,89
+3,Maryland,17
+3,Massachusetts,5
+3,Michigan,259
+3,Minnesota,10
+3,Missouri,14
+3,Mississippi,18
+3,Montana,4
+3,North Carolina,8
+3,North Dakota,3
+3,Nebraska,4
+3,New Hampshire,3
+3,New Jersey,265
+3,New Mexico,5
+3,Nevada,26
+3,New York,1991
+3,Ohio,55
+3,Oklahoma,23
+3,Oregon,18
+3,Pennsylvania,63
+3,Rhode Island,8
+3,South Carolina,22
+3,South Dakota,1
+3,Tennessee,22
+3,Texas,50
+3,Utah,4
+3,Virginia,27
+3,Vermont,12
+3,Washington,222
+3,Wisconsin,16
+3,West Virginia,1
+3,Wyoming,0
+4,Alaska,9
+4,Alabama,269
+4,Arkansas,61
+4,Arizona,318
+4,California,2031
+4,Colorado,776
+4,Connecticut,2257
+4,District Of Columbia,224
+4,Delaware,152
+4,Florida,1267
+4,Georgia,1125
+4,Hawaii,16
+4,Iowa,162
+4,Idaho,62
+4,Illinois,2354
+4,Indiana,1007
+4,Kansas,135
+4,Kentucky,240
+4,Louisiana,1858
+4,Maine,3562
+4,Maryland,985
+4,Massachusetts,53
+4,Michigan,3791
+4,Minnesota,342
+4,Missouri,331
+4,Mississippi,260
+4,Montana,18
+4,North Carolina,377
+4,North Dakota,19
+4,Nebraska,72
+4,New Hampshire,72
+4,New Jersey,7231
+4,New Mexico,123
+4,Nevada,253
+4,New York,23409
+4,Ohio,975
+4,Oklahoma,222
+4,Oregon,103
+4,Pennsylvania,2290
+4,Rhode Island,266
+4,South Carolina,244
+4,South Dakota,17
+4,Tennessee,199
+4,Texas,781
+4,Utah,46
+4,Virginia,552
+4,Vermont,48
+4,Washington,813
+4,Wisconsin,316
+4,West Virginia,44
+4,Wyoming,7
+5,Alaska,10
+5,Alabama,629
+5,Arkansas,133
+5,Arizona,910
+5,California,4171
+5,Colorado,1444
+5,Connecticut,3942
+5,District Of Columbia,466
+5,Delaware,366
+5,Florida,2450
+5,Georgia,2038
+5,Hawaii,17
+5,Iowa,532
+5,Idaho,82
+5,Illinois,5389
+5,Indiana,1966
+5,Kansas,213
+5,Kentucky,431
+5,Louisiana,2683
+5,Maine,6846
+5,Maryland,2433
+5,Massachusetts,89
+5,Michigan,5491
+5,Minnesota,1038
+5,Missouri,771
+5,Mississippi,734
+5,Montana,19
+5,North Carolina,875
+5,North Dakota,59
+5,Nebraska,165
+5,New Hampshire,245
+5,New Jersey,11696
+5,New Mexico,356
+5,Nevada,429
+5,New York,29635
+5,Ohio,2151
+5,Oklahoma,333
+5,Oregon,153
+5,Pennsylvania,5536
+5,Rhode Island,720
+5,South Carolina,494
+5,South Dakota,60
+5,Tennessee,364
+5,Texas,1669
+5,Utah,108
+5,Virginia,1369
+5,Vermont,55
+5,Washington,1118
+5,Wisconsin,592
+5,West Virginia,73
+5,Wyoming,15
+6,Alaska,12
+6,Alabama,948
+6,Arkansas,270
+6,Arizona,1632
+6,California,6081
+6,Colorado,1679
+6,Connecticut,4320
+6,District Of Columbia,551
+6,Delaware,507
+6,Florida,3503
+6,Georgia,2807
+6,Hawaii,18
+6,Iowa,713
+6,Idaho,92
+6,Illinois,6922
+6,Indiana,2447
+6,Kansas,275
+6,Kentucky,565
+6,Louisiana,3112
+6,Maine,8052
+6,Maryland,3228
+6,Massachusetts,105
+6,Michigan,6193
+6,Minnesota,1441
+6,Missouri,1023
+6,Mississippi,1073
+6,Montana,24
+6,North Carolina,1334
+6,North Dakota,79
+6,Nebraska,272
+6,New Hampshire,371
+6,New Jersey,15035
+6,New Mexico,497
+6,Nevada,507
+6,New York,31777
+6,Ohio,2862
+6,Oklahoma,387
+6,Oregon,207
+6,Pennsylvania,6648
+6,Rhode Island,950
+6,South Carolina,735
+6,South Dakota,91
+6,Tennessee,597
+6,Texas,2421
+6,Utah,172
+6,Virginia,1761
+6,Vermont,56
+6,Washington,1332
+6,Wisconsin,784
+6,West Virginia,93
+6,Wyoming,20
+7,Alaska,17
+7,Alabama,1121
+7,Arkansas,321
+7,Arizona,2237
+7,California,7049
+7,Colorado,1725
+7,Connecticut,4348
+7,District Of Columbia,568
+7,Delaware,515
+7,Florida,4242
+7,Georgia,3000
+7,Hawaii,19
+7,Iowa,749
+7,Idaho,102
+7,Illinois,7187
+7,Indiana,2567
+7,Kansas,294
+7,Kentucky,625
+7,Louisiana,3308
+7,Maine,8325
+7,Maryland,3370
+7,Massachusetts,114
+7,Michigan,6314
+7,Minnesota,1502
+7,Missouri,1069
+7,Mississippi,1249
+7,Montana,31
+7,North Carolina,1503
+7,North Dakota,87
+7,Nebraska,285
+7,New Hampshire,391
+7,New Jersey,15541
+7,New Mexico,545
+7,Nevada,593
+7,New York,32029
+7,Ohio,3058
+7,Oklahoma,422
+7,Oregon,234
+7,Pennsylvania,6904
+7,Rhode Island,976
+7,South Carolina,950
+7,South Dakota,109
+7,Tennessee,731
+7,Texas,3192
+7,Utah,215
+7,Virginia,1968
+7,Vermont,56
+7,Washington,1438
+7,Wisconsin,820
+7,West Virginia,96
+7,Wyoming,21
