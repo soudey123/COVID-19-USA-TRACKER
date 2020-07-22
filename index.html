@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>CSS Website Layout</title>
     <meta charset="utf-8">
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <!-- Load d3-annotation -->
     <script src="js/d3_annotation.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    <style type="text/css">
-
-        .header img {
-            float: left;
-            width: 100px;
-            height: 50px;
-            background: #555555;
+        body {
+            margin: 0;
+            font: 11px sans-serif;
+            background-color: #ffffff;
+            background-image: url('img/COVID19.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
         }
 
         .header h1 {
@@ -21,39 +27,57 @@
             left: 10px;
         }
 
-        footer {
-            background: #020000;
-            color: #070000;
+        /* Style the top navigation bar */
+        .topnav {
+            overflow: hidden;
+            background-color: #5a6ddc;
         }
 
-        /* Legend Font Style */
-        body {
-            font: 11px sans-serif;
-            background-color: #ffffff;
-            background-image: url('img/COVID19.jpg');
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: 100% 100%;
-        }
-        .bar1 { fill: #6fec76; }
-        .bar2 { fill: #0a81a8; }
-        .bar3 { fill: #e3486c; }
-        .bar:hover {fill: orange; }
-        /* Legend Position Style */
-        .legend {
-            position:absolute;
-            left:20px;
-            top:30px;
+        /* Style the topnav links */
+        .topnav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
         }
 
-        .axis text {
-            font: 10px sans-serif;
+        /* Change color on hover */
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
         }
 
-        .axis line, .axis path {
-            fill: none;
-            stroke: #000;
-            shape-rendering: crispEdges;
+        /* Create three unequal columns that floats next to each other */
+        .column {
+            float: left;
+            padding: 10px;
+        }
+
+        /* Left and right column */
+        .column.side {
+            width: 25%;
+        }
+
+        /* Middle column */
+        .column.middle {
+            width: 100%;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+            gap: 0px;
+        }
+
+        /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 600px) {
+            .column.middle {
+                width: 100%;
+            }
         }
 
         .tooltip {
@@ -69,66 +93,66 @@
             color: midnightblue;
             padding: 0.3px;
         }
-        .box { height: 50px; background: #0F0; width: 100%; margin-top: 10px; }
-        .container{
-            width: auto;
-            height: auto;
-            background-color:#d0f3f0;
-            color:rgba(236,241,175,0.09);
-            padding:10px;
-            border: 2px outset #4e2a23;
+
+        /* Style the footer */
+        .footer {
+            background-color: #f1f1f1;
+            padding: 10px;
+            text-align: center;
         }
 
-
+        .container{
+            position: center;
+            margin: 1px;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
+
 <div class="header">
     <h1 style="text-align:center;color:floralwhite;font-family:courier;font-size:250%">COVID-19 USA DATA TRACKER</h1>
 </div>
 <br>
-<p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%"><b style="color: purple;font-size: 20px">COVID-19 Cases USA Map:</b><br>This map shows COVID-19 cases reported by U.S. states as of 07/15/2019.Latest surge of COVID-19 cases in Texas , Arizona , Florida and Illinois reflected on the map.<br> Hover over the maps to see the following details – a) number of cases, b) number of cases per 100k population, c) number of cumulative death and d) number of deaths per 100k population reported in each jurisdiction. Legend scale on the top-left side shows the linear variation of total COVID-19 cases reported in U.S. states. </p>
-<div id="my_dataviz" style="background-color:#d7d4cc;color:#202c42;padding:10px;border: 5px outset #08080e" >
+
+<div class="body">
+     <div class="container">
+        <div class="topnav">
+            <a href="index.html">HOME</a>
+            <a href="US_STATE_CASES_DEATHS.html">U.S. STATE DATA</a>
+            <a href="Demographic.html">DEMOGRAPHIC DATA</a>
+            <a href="CASES_DEATHS_TREND.html">TREND DATA</a>
+        </div>
+     </div>
+
+<div class="row">
+    <div class="column middle">
+        <p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 20px">COVID-19 Cases USA Map:</b><br>This map shows COVID-19 cases reported by U.S. states as of 07/15/2019.Latest surge of COVID-19 cases in Texas , Arizona , Florida and Illinois reflected on the map.<br><br> Hover over the maps to see the following details – a) number of cumulative cases, b) number of cumulative cases per 100k population, c) number of cumulative deaths and d) number of cumulative deaths per 100k population reported in each jurisdiction. Legend scale on the top-left side shows the linear variation of total COVID-19 cases reported in U.S. states.<br></p>
+        <div id="my_dataviz" style="background-color:#d7d4cc;color:#202c42;padding:10px;border: 5px outset #08080e" >
+        </div>
+    <p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 20px">Daily New Cases Trend in USA:</b><br> The following chart shows the number of new COVID-19 cases reported each day in the U.S. since mid-March when the outbreak was officially declared in the United States. Click buttons to switch between the trend of daily new counts and 7-day average data.<br><br> The 7-Day moving average of new cases (current day + 6 preceding days / 7) was calculated to smooth expected variations in daily counts. Additionally, hover over the bars to see the number of new cases by day and check the annotation to explore the recent exponential surge started from mid-June due to aggressive reopening strategy carried out by a few U.S. jurisdictions.<br></p>
+    <div id="my_dataviz4" style="background-color:#d7d4cc;color:#202c42;padding:10px;border: 5px outset #08080e">
+        <div><button onclick="update('Cases')">Cases</button>
+            <button onclick="update('Average_7Day')">Average_7Day</button></div>
+         </div>
+    </div>
 </div>
-<br>
-<p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%"><b style="color: purple;font-size: 20px">Daily New Cases Trend in USA:</b><br> The following chart shows the number of new COVID-19 cases reported each day in the U.S. since mid-March when the outbreak was officially declared in the United States. Click buttons to switch between the trend of daily new counts and 7-day average data.<br><br> The 7-Day moving average of new cases (current day + 6 preceding days / 7) was calculated to smooth expected variations in daily counts. Additionally, hover over the bars to see the number of new cases by day and check the annotation to explore the recent exponential surge started from mid-June due to aggressive reopening strategy carried out by a few U.S. jurisdictions.</p>
-<div class="container" id="my_dataviz4">
-    <div><button onclick="update3('Cases')">Cases</button>
-        <button onclick="update3('Average_7Day')">Average_7Day</button></div>
-</div>
-<br>
-<p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%"><b style="color: purple;font-size: 20px">COVID-19 Total Cases vs Deaths By State:</b><br>The following scatter plot represents the number of COVID-19 cases vs total deaths reported in  different U.S. states as of 07/15/2020. Hover over the circles to see the additional details. Annotation describes that the New York state reported highest number of total deaths and cases in the United States so far.</p>
-<div id="my_dataviz3" style="background-color:#e6efee;color:rgba(177,183,241,0.09);padding:10px;border: 5px outset #101079"></div>
-<br>
-<p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%"><b style="color: purple;font-size: 20px">Deaths By State:</b><br> The following bar plots represent the descending order of total COVID-19 deaths reported in U.S. states as of 07/15/2020. New York and New Jersey are the only two states where the total cumulative death counts surpassed 10,000.</p>
-<div id="my_dataviz2" style="background-color:#d0f3f0;color:rgba(236,241,175,0.09);padding:10px;border: 5px outset #08080e"></div>
-<br>
-<p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%"><b style="color: purple;font-size: 20px">Demographic Analysis#1:</b><br> The following interactive chart shows the cumulative COVID-19 deaths by sex and age group for the United States of 07/15/2020. Click the buttons to switch between two sets of data representation.<br> It illustrates a correlation that the COVID-19 transmitted disease is more fatal to older adults especially between age group "75-84 years" for Male and age group "85 years and above" for Female. </p>
-<div id="my_dataviz1" style="background-color:#d7d4cc;color:#eaba98;padding:10px;border: 5px outset #08080e">
-    <div><button type="button" onclick="update('Male')">Male</button>
-    <button type="button" onclick="update('Female')">Female</button></div>
-</div>
-<br>
-<p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%"><b style="color: purple;font-size: 20px">Demographic Analysis#2:</b><br> The following bubble chart shows the distribution of COVID-19 deaths by race and Hispanic origin which creates an avenue to perform further analysis about the differential impact of COVID-19 deaths on these populations.</p>
-<div id="my_dataviz6" style="background-color:#dafffc;color:#cfffff;padding:10px;border: 5px outset #080817"></div>
-<br>
-<p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%"><b style="color: purple;font-size: 20px">Grid View Of COVID-19 Deaths Trend By State:</b><br>The following grid chart exhibits the COVID-19 deaths trend reported in different U.S. states as of 07/15/2020. Apart from New York and New Jersey other states did not report steep rise in COVID-19 deaths so far. However, as shown in the previous chart that there is a possibility to observe similar trend in states like Texas, California, Florida, Arizona and Illinois due to the exponential increase of COVID-19 cases for past one month.<br><br>In the following grid chart , the months are represented in numeric figure on X axis e.g. Feb=2,April=4 and June=6.</p>
-<div id="my_dataviz5" style="background-color:#f6f8f8;color:rgba(53,69,229,0.09);padding:10px;border: 5px outset #021d28"></div>
 <br>
 <footer>
-    <p style="background-color:#ffffff;font-family:Helvetica Neue;font-size:130%">
+    <p style="background-color:#ffffff;font-family:Helvetica Neue;font-size:130%" align="justify">
         <b>Reference:</b> For more information about COVID-19 disease please visit <a href="https://www.cdc.gov/coronavirus/2019-nCoV/index.html">https://www.cdc.gov/coronavirus/2019-nCoV/index.html</a>
         <br>
         <b>Data Courtesy:</b><a href="https://www.cdc.gov/"> https://www.cdc.gov/</a>
         <br>
         <b>Image Courtesy:</b><a href="https://phil.cdc.gov/Details.aspx?pid=23311"> https://phil.cdc.gov/Details.aspx?pid=23311</a>
         <br>
-        <b>Viz creator:</b> Soumava Dey</p>
+        <b>Viz creator:</b> Soumava Dey<br></p>
 </footer>
+</div>
 
 <script type="text/javascript">
 
-////////////////////////////////////// Beginning of USA Map code ///////////////////////////////////////////////////////
+    ////////////////////////////////////// Beginning of USA Map code ///////////////////////////////////////////////////////
     //Width and height of map
     var width = 1200;
     var height = 550;
@@ -220,8 +244,8 @@
                     var html  = "<span><b> State : </b><b>" + d.properties.NAME + "</b></span><br/>" +
                         "<span style='color:indianred'><b> Total Cases: </b>" + d.properties.total_cases + "</span></br>" +
                         "<span style='color:darkred'><b> Cases per 100k: </b>" + d.properties.cases_100k + "</span></br>" +
-                        "<span style='color:red'><b> Total Death: </b>" + d.properties.value + "</span></br>" +
-                        "<span style='color:palevioletred'><b> Death per 100k: </b>" + d.properties.death_100k + "</span></br>"
+                        "<span style='color:red'><b> Total Deaths: </b>" + d.properties.value + "</span></br>" +
+                        "<span style='color:palevioletred'><b> Deaths per 100k: </b>" + d.properties.death_100k + "</span></br>"
 
                     ;
 
@@ -245,7 +269,7 @@
             // add a legend
             var l_w = 140, l_h = 500;
 
-            var key = d3.select("body")
+            var key = d3.select("#my_dataviz")
                 .append("svg")
                 .attr("width", l_w)
                 .attr("height", l_h)
@@ -274,7 +298,7 @@
                 .attr("width", l_w - 100)
                 .attr("height", l_h/2)
                 .style("fill", "url(#gradient)")
-                .attr("transform", "translate(49,145)");
+                .attr("transform", "translate(49,0)");
 
 
             var y = d3.scaleLinear()
@@ -285,14 +309,13 @@
 
             key.append("g")
                 .attr("class", "y axis")
-                .attr("transform", "translate(90,145)")
+                .attr("transform", "translate(90,0)")
                 .call(yAxis)
 
         });
     });
-////////////////////////////////////// End of USA Map code ///////////////////////////////////////////////////////
 
-////////////////////////////////////// Beginning of USA Daily New Cases Trend code //////////////////////////////
+    ////////////////////////////////////// Beginning of USA Daily New Cases Trend code //////////////////////////////
 
     // set the dimensions and margins of the graph
     var margin_daily = {top: 40, right: 20, bottom: 70, left: 40},
@@ -345,6 +368,7 @@
         .attr("transform", "translate(0," + height_daily + ")")
 
 
+
     // Initialize the Y axis
     var y = d3.scaleLinear()
         .range([ height_daily, 0]);
@@ -359,16 +383,19 @@
 
 
     // A function that create / update the plot for a given variable:
-    function update3(selectedVar) {
+    function update(selectedVar) {
 
         // Parse the Data
         d3.csv("data/US_Daily_New_Case.csv", function(data) {
 
             // X axis
             x.domain(data.map(function(d) { return d.Date; }))
-            xAxis.transition().duration(1000).call(d3.axisBottom(x)).selectAll("text")
+            xAxis.transition().duration(1000).call(d3.axisBottom(x))
+                .selectAll("text")
                 .attr("transform", "translate(-15,10)rotate(-90)")
                 .style("text-anchor", "end");
+
+
 
 
             // Add Y axis
@@ -414,568 +441,13 @@
 
 
 
-
         })
 
     }
-    update3('Cases')
+    update('Cases')
 
-////////////////////////////////////// End of USA Daily New Cases Trend code //////////////////////////////
-
-////////////////////////////////////// Beginning of scatter plot code ////////////////////////////////////
-
-    // set the dimensions and margins of the graph
-    var margin_scatter = {top: 10, right: 30, bottom: 30, left: 60},
-        width_scatter = 1175 - margin_scatter.left - margin_scatter.right,
-        height_scatter = 500 - margin_scatter.top - margin_scatter.bottom;
-    // append the svg object to the body of the page
-    var svg_scatter = d3.select("#my_dataviz3")
-        .append("svg")
-        .attr("width", width_scatter + margin_scatter.left + margin_scatter.right)
-        .attr("height", height_scatter + margin_scatter.top + margin_scatter.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin_scatter.left + "," + margin_scatter.top + ")")
-    //var color = d3.scaleOrdinal(d3.schemeCategory10);
-
-    //Read the data
-    d3.csv("data/US_MAP_DATA.csv", function(data) {
-
-        var dataArray = [];
-        for (var d = 0; d < data.length; d++) {
-            dataArray.push(parseFloat(data[d].Total_Cases))
-        }
-        var minVal = d3.min(dataArray)
-        var midVal = (d3.max(dataArray) - d3.min(dataArray)) / 2
-        var maxVal = d3.max(dataArray)
-
-        var color = d3.scaleLinear()
-            .domain([minVal,midVal,maxVal])
-            .range(['#4daf4a','#1a93e4','#e41a1c'])
-
-        // Add X axis
-        var x = d3.scaleLinear()
-            .domain([0, 0])
-            .range([ 0, width_scatter ]);
-        svg_scatter.append("g")
-            .attr("class", "myXaxis")   // Note that here we give a class to the X axis, to be able to call it later and modify it
-            .attr("transform", "translate(0," + height_scatter + ")")
-            .call(d3.axisBottom(x))
-            .attr("opacity", "0")
-
-        // text label for the x axis
-        svg_scatter.append("text")
-            .attr("transform",
-                "translate(" + (width_scatter/2) + " ," +
-                (height_scatter + margin_scatter.top + 13) + ")")
-            .style("text-anchor", "middle")
-            .text("Total Death");
-
-        // Add Y axis
-        var y = d3.scaleLinear()
-            .domain([0, 450000])
-            .range([ height_scatter, 0]);
-        svg_scatter.append("g")
-            .call(d3.axisLeft(y));
-
-        svg_scatter.append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", 0 - margin_scatter.left)
-            .attr("x",0 - (height_scatter / 2))
-            .attr("dy", "1em")
-            .style("text-anchor", "middle")
-            .text("Total Cases");
-
-        // Add the tooltip container to the vis container
-        // it's invisible and its position/contents are defined during mouseover
-        var tooltip = d3.select("#my_dataviz3").append("div")
-            .attr("class", "tooltip")
-            .style("opacity", 0);
-
-        // tooltip mouseover event handler
-        var tipMouseover = function(d) {
-            //var color = color(d.jurisdiction);
-            var html  = "<span>" + d.jurisdiction + "</span><br/>" +
-                "<b style='color: red'>" + d.Death + "</b> Death, <b style='color: darkred'>" + d.Total_Cases + "</b> Total Cases";
-
-            tooltip.html(html)
-                .style("left", (d3.event.pageX + 15) + "px")
-                .style("top", (d3.event.pageY - 28) + "px")
-                .transition()
-                .duration(200) // ms
-                .style("opacity", .9) // started as 0!
-
-        };
-
-        // tooltip mouseout event handler
-        var tipMouseout = function(d) {
-            tooltip.transition()
-                .duration(300) // ms
-                .style("opacity", 0); // don't care about position!
-        };
-
-        var annotationsRight = [
-            {
-                note: {
-
-                    title: "NewYork state reported highest fatality rate"
-                },
-                connector: {
-                    end: "arrow",        // Can be none, or arrow or dot
-                    type: "line",      // ?? don't know what it does
-                    lineType : "vertical",    // ?? don't know what it does
-                    endScale: 2    // dot size
-                },
-                color: ['blue'],
-                x: 983,
-                y: 55,
-                dy: 120,
-                dx: -100
-            }
-        ]
-
-// Add annotation to the chart
-        var makeAnnotationsRight = d3.annotation()
-            .annotations(annotationsRight)
-
-        // Add dots
-        svg_scatter.append('g')
-            .call(makeAnnotationsRight)
-            .selectAll("dot")
-            .data(data)
-            .enter()
-            .append("circle")
-            .attr("cx", function (d) { return x(d.Death); } )
-            .attr("cy", function (d) { return y(d.Total_Cases); } )
-            .attr("r", 10)
-            .style("fill", function(d) { return color(d.Total_Cases); })
-            .on("mouseover", tipMouseover)
-            .on("mouseout", tipMouseout);
-
-        // new X axis
-        x.domain([0, 35000])
-        svg_scatter.select(".myXaxis")
-            .transition()
-            .duration(2000)
-            .attr("opacity", "1")
-            .call(d3.axisBottom(x));
-
-
-        svg_scatter.selectAll("circle")
-            .transition()
-            .delay(function(d,i){return(i*3)})
-            .duration(2000)
-            .attr("cx", function (d) { return x(d.Death); } )
-            .attr("cy", function (d) { return y(d.Total_Cases); })
-
-
-
-
-    })
-
-////////////////////////////////////// End of scatter plot code ////////////////////////////////////
-
-///////////////////////////////////Beginning of Deaths by state bar plot code //////////////////////
-
-    var margin1 = {top: 50, right: 30, bottom: 80, left: 60},
-        width1 = 1200 - margin1.left - margin1.right,
-        height1 = 400 - margin1.top - margin1.bottom;
-    // append the svg object to the body of the page
-    var svg2 = d3.select("#my_dataviz2")
-        .append("svg")
-        .attr("width", width1 + margin1.left + margin1.right)
-        .attr("height", height1 + margin1.top + margin1.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin1.left + "," + margin1.top + ")");
-
-    //var tooltip = d3.select("body").append("div").attr("class", "toolTip");
-    // Initialize the X axis
-    var x_b = d3.scaleBand()
-        .range([0, width1 ])
-        .padding(0.2);
-    var xAxis_b = svg2.append("g")
-        .attr("transform", "translate(0," + height1 + ")")
-
-    // Initialize the Y axis
-    var y_b = d3.scaleLinear()
-        .range([height1, 0]);
-    var yAxis_b = svg2.append("g")
-        .attr("class", "myYaxis")
-
-
-    // A function that create / update the plot for a given variable:
-    function update2(selectedVar) {
-        // Parse the Data
-        d3.csv("data/COVID_Deaths_State.csv", function (data) {
-
-            data.sort(function (a, b) {
-                return b.Total_Deaths - a.Total_Deaths;
-            });
-
-            var color = d3.scaleOrdinal(d3.schemeCategory10)
-            //var colorScale = d3.category20c();
-            // X axis
-            x_b.domain(data.map(function (d) {
-                return d.State;
-            }))
-            xAxis_b.transition().duration(1000).call(d3.axisBottom(x_b)).selectAll("text")
-                .attr("transform", "translate(-10,0)rotate(-45)")
-                .style("text-anchor", "end");
-
-            // text label for the x axis
-            svg2.append("text")
-                .attr("transform",
-                    "translate(" + (width1 / 2.3) + " ," +
-                    (height + margin.top + 20) + ")")
-                .style("text-anchor", "middle")
-                .text("US States");
-
-            // Add Y axis
-            y_b.domain([0, d3.max(data, function (d) {
-                return +d.Total_Deaths
-            })]);
-            yAxis_b.transition().duration(1000).call(d3.axisLeft(y_b));
-
-            svg2.append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("y", 0 - margin1.left)
-                .attr("x", 0 - (height1 / 2))
-                .attr("dy", "1em")
-                .style("text-anchor", "middle")
-                .text("Total Deaths");
-            //color.domain(data.map(function (d){ return d.Group; }));
-
-            // variable u: map data to existing bars
-            var u2 = svg2.selectAll("rect")
-                .data(data)
-
-            // update bars
-            u2
-                .enter()
-                .append("rect")
-                .merge(u2)
-                .transition()
-                .duration(1000)
-                .attr("x", function (d) {
-                    return x_b(d.State);
-                })
-                .attr("y", function (d) {
-                    return y_b(d.Total_Deaths);
-                })
-                .attr("width", x_b.bandwidth())
-                .attr("height", function (d) {
-                    return height1 - y_b(d.Total_Deaths);
-                })
-                //.attr("fill", function(d){return colorScale(d.Group); })
-                //.attr("fill", function (d){ return color(d.State); })
-                .attr("class", function (d) {
-                    var s = "bar ";
-                    if (d.Total_Deaths < 5000) {
-                        return s + "bar1";
-                    } else if (d.Total_Deaths < 10000) {
-                        return s + "bar2";
-                    } else {
-                        return s + "bar3";
-                    }
-                });
-// Initialize plot
-
-        })}
-
-    update2('Male')
-
-///////////////////////////////////End of Deaths by state bar plot code //////////////////////
-
-////////////////////////////////Beginning of Demographic analysis#1 code //////////////////////
-
-    // set the dimensions and margins of the graph
-    var margin = {top: 50, right: 30, bottom: 80, left: 60},
-        width = 1060 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
-
-    // append the svg object to the body of the page
-    var svg1 = d3.select("#my_dataviz1")
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-
-    //var tooltip = d3.select("body").append("div").attr("class", "toolTip");
-    // Initialize the X axis
-    var x1 = d3.scaleBand()
-        .range([ 0, width ])
-        .padding(0.2);
-    var xAxis1 = svg1.append("g")
-        .attr("transform", "translate(0," + height + ")")
-
-    // Initialize the Y axis
-    var y1 = d3.scaleLinear()
-        .range([ height, 0]);
-    var yAxis1 = svg1.append("g")
-        .attr("class", "myYaxis")
-
-    svg1.append("text")
-        .attr("x", (width / 2))
-        .attr("y", 500)
-        .attr("text-anchor", "middle")
-        .style("font-size", "20px")
-        .style("text-decoration", "underline")
-        .text("COVID-19 Death By Gender and Age");
-
-    // A function that create / update the plot for a given variable:
-    function update(selectedVar) {
-
-        // Parse the Data
-        d3.csv("data/COVID_AGE_GENDER.csv", function(data) {
-
-            //var color = d3.scaleLinear().domain(data)
-                //.range(["green","blue","red"])
-            //var colorScale = d3.category20c();
-            // X axis
-            x1.domain(data.map(function(d) { return d.Group; }))
-            xAxis1.transition().duration(1000).call(d3.axisBottom(x1)).selectAll("text")
-                .attr("transform", "translate(-10,0)rotate(-45)")
-                .style("text-anchor", "end");
-
-            // text label for the x axis
-            svg1.append("text")
-                .attr("transform",
-                    "translate(" + (width/2) + " ," +
-                    (height + margin.top + 20) + ")")
-                .style("text-anchor", "middle")
-                .text("Age Group");
-
-            // Add Y axis
-            y1.domain([0, d3.max(data, function(d) { return +d[selectedVar] }) ]);
-            yAxis1.transition().duration(1000).call(d3.axisLeft(y1));
-
-            svg1.append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("y", 0 - margin.left)
-                .attr("x",0 - (height / 2))
-                .attr("dy", "1em")
-                .style("text-anchor", "middle")
-                .text("Total Deaths");
-            //color.domain(data.map(function (d){ return d.Group; }));
-
-            // variable u: map data to existing bars
-            var u = svg1.selectAll("rect")
-                .data(data)
-
-            // update bars
-            u
-                .enter()
-                .append("rect")
-                .merge(u)
-                .transition()
-                .duration(1000)
-                .attr("x", function(d) { return x1(d.Group); })
-                .attr("y", function(d) { return y1(d[selectedVar]); })
-                .attr("width", x1.bandwidth())
-                .attr("height", function(d) { return height - y1(d[selectedVar]); })
-                //.attr("fill", function(d){return colorScale(d.Group); })
-                .attr("fill", "#3b6199")
-
-
-        })}
-
-    update('Male')
-
-////////////////////////////////End of Demographic analysis#1 code //////////////////////
-
-////////////////////////////////Beginning of Demographic analysis#2 code //////////////////////
-
-// Data is hard coded based on the information gathered from the CDC website.
-    dataset = {
-        "children": [{"Name":"White","Count":64073},
-            {"Name":"Black/African American","Count":27848},
-            {"Name":"American Indian/Alaska Native","Count":974},
-            {"Name":"Asian","Count":6022},
-            {"Name":"Hispanic/Latino","Count":20849},
-            {"Name":"Other","Count":1608}]
-    };
-
-    var diameter = 750;
-    var color = d3.scaleOrdinal(d3.schemeCategory20);
-
-    var annotations_bubble = [
-        {
-            note: {
-                title: "Least fatality observed in 'American Indian/Alaska Native' community",
-                align: "right"
-            },
-            connector: {
-                end: "arrow",        // Can be none, or arrow or dot
-                type: "line",      // ?? don't know what it does
-                lineType : "vertical",    // ?? don't know what it does
-                endScale: 1    // dot size
-            },
-            color: ["green"],
-            x: 250,
-            y: 120,
-            dy: 125,
-            dx: 260
-        }
-    ]
-
-    // Add annotation to the chart
-    var makeAnnotationsRight_bubble = d3.annotation()
-        .annotations(annotations_bubble)
-
-    var bubble = d3.pack(dataset)
-        .size([diameter, diameter])
-        .padding(2);
-    console.log(bubble)
-
-    var svg_bubble = d3.select("#my_dataviz6")
-        .append("svg")
-        .attr("width", diameter)
-        .attr("height", diameter)
-        .attr("class", "bubble");
-
-    var nodes = d3.hierarchy(dataset)
-        .sum(function(d) { return d.Count; });
-    console.log(nodes)
-
-    var node = svg_bubble.selectAll(".node")
-        .data(bubble(nodes).descendants())
-        .enter()
-        .filter(function(d){
-            return  !d.children
-        })
-        .append("g")
-        .call(makeAnnotationsRight_bubble)
-        .attr("class", "node")
-        .attr("transform", function(d) {
-            console.log(d.x);
-            return "translate(" + d.x + "," + d.y + ")";
-        });
-
-    node.append("title")
-        .text(function(d) {
-            return d.Name + ": " + d.Count;
-        });
-
-    node.append("circle")
-        .attr("r", function(d) {
-            return d.r;
-        })
-        .style("fill", function(d,i) {
-            return color(i);
-        });
-
-    node.append("text")
-        .attr("dy", ".2em")
-        .style("text-anchor", "middle")
-        .text(function(d) {
-            return d.data.Name.substring(0, d.r / 3);
-        })
-        .attr("font-family", "sans-serif")
-        .attr("font-size", function(d){
-            return d.r/5;
-        })
-        .attr("fill", "white");
-
-    node.append("text")
-        .attr("dy", "1.3em")
-        .style("text-anchor", "middle")
-        .text(function(d) {
-            return d.data.Count;
-        })
-
-        .attr("font-size", function(d){
-            return d.r/6;
-        })
-        .attr("fill", "white");
-
-    d3.select(self.frameElement)
-        .style("height", diameter + "px");
-
-////////////////////////////////End of Demographic analysis#2 code //////////////////////
-
-////////////////////////////////Beginning of death trend by state code //////////////////////
-
-    // set the dimensions and margins of the graph
-    var margin_line = {top: 30, right: 0, bottom: 30, left: 50},
-        width_line = 210 - margin_line.left - margin_line.right,
-        height_line = 210 - margin_line.top - margin_line.bottom;
-
-    //Read the data
-    d3.csv("data/covid_deaths_usafacts.csv", function(data) {
-
-        // group the data: I want to draw one line per group
-        var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
-            .key(function(d) { return d.State;})
-            .entries(data);
-
-        // What is the list of groups?
-        allKeys = sumstat.map(function(d){return d.key})
-
-        // Add an svg element for each group. The will be one beside each other and will go on the next row when no more room available
-        var svg = d3.select("#my_dataviz5")
-            .selectAll("uniqueChart")
-            .data(sumstat)
-            .enter()
-            .append("svg")
-            .attr("width", width_line + margin_line.left + margin_line.right)
-            .attr("height", height_line + margin_line.top + margin_line.bottom)
-            .append("g")
-            .attr("transform",
-                "translate(" + margin_line.left + "," + margin_line.top + ")");
-
-        // Add X axis --> it is a date format
-        var x = d3.scaleLinear()
-            .domain(d3.extent(data, function(d) { return d.Month; }))
-            .range([ 0, width_line ]);
-        svg
-            .append("g")
-            .attr("transform", "translate(0," + height_line + ")")
-            .call(d3.axisBottom(x).ticks(3));
-
-        //Add Y axis
-        var y = d3.scaleLinear()
-            .domain([0, d3.max(data, function(d) { return +d.Death; })])
-            .range([ height_line, 0 ]);
-        svg.append("g")
-            .call(d3.axisLeft(y).ticks(5));
-
-        // color palette
-        var color = d3.scaleOrdinal()
-            .domain(allKeys)
-            .range(['#4daf4a','#377eb8','#e41a1c','#984ea3'])
-
-
-
-        //var color = d3.scaleOrdinal(d3.schemeCategory20);
-        // Draw the line
-        svg
-            .append("path")
-            .attr("fill", "none")
-            .attr("stroke", function(d){ return color(d.key) })
-            .attr("stroke-width", 1.9)
-            .attr("d", function(d){
-                return d3.line()
-                    .x(function(d) { return x(d.Month); })
-                    .y(function(d) { return y(+d.Death); })
-                    (d.values)
-            })
-
-        // Add titles
-        svg
-            .append("text")
-            .attr("text-anchor", "start")
-            .attr("y", -5)
-            .attr("x", 0)
-            .text(function(d){ return(d.key)})
-            .style("fill", function(d){ return color(d.key) })
-
-    })
-
-////////////////////////////////End of death trend by state code //////////////////////
-
+    ////////////////////////////////////// End of USA Daily New Cases Trend code //////////////////////////////
 </script>
+
 </body>
 </html>

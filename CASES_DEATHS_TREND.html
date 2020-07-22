@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CSS Website Layout</title>
+    <meta charset="utf-8">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="js/d3_annotation.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font: 11px sans-serif;
+            background-color: #ffffff;
+            background-image: url('img/COVID19.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+
+        .header h1 {
+            height: 10px;
+            top: 18px;
+            left: 10px;
+        }
+
+        /* Style the top navigation bar */
+        .topnav {
+            overflow: hidden;
+            background-color: #5a6ddc;
+        }
+
+        /* Style the topnav links */
+        .topnav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Change color on hover */
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Create three unequal columns that floats next to each other */
+        .column {
+            float: left;
+            padding: 10px;
+        }
+
+        /* Left and right column */
+        .column.side {
+            width: 25%;
+        }
+
+        /* Middle column */
+        .column.middle {
+            width: 100%;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+            gap: 0px;
+        }
+
+        /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 600px) {
+            .column.middle {
+                width: 100%;
+            }
+        }
+
+        .tooltip {
+            placement: auto;
+            position: absolute;
+            display:inline;
+            overflow:auto;
+            font-size: 15px;
+            width:  auto;
+            height: auto;
+            pointer-events: none;
+            background-color: antiquewhite;
+            color: midnightblue;
+            padding: 0.3px;
+        }
+
+        /* Style the footer */
+        .footer {
+            background-color: #f1f1f1;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .container{
+            position: center;
+            margin: 1px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1 style="text-align:center;color:floralwhite;font-family:courier;font-size:250%">COVID-19 USA DATA TRACKER</h1>
+</div>
+<br>
+
+<div class="body">
+    <div class="container">
+        <div class="topnav">
+            <a href="index.html">HOME</a>
+            <a href="US_STATE_CASES_DEATHS.html">U.S. STATE DATA</a>
+            <a href="Demographic.html">DEMOGRAPHIC DATA</a>
+            <a href="CASES_DEATHS_TREND.html">TREND DATA</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column middle">
+            <p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 20px">COVID-19 Cases Trend By State:</b><br>The following line chart exhibits the COVID-19 cases trend reported in different U.S. states as of 07/15/2020. <br><br>In the following line chart , the months are represented in numeric figure on X axis e.g. Feb=2,April=4 and June=6.<br></p>
+            <div id="my_dataviz" style="background-color:#f6f8f8;color:rgba(53,69,229,0.09);padding:10px;border: 5px outset #021d28">
+                <div><select id="selectButton"></select></div>
+            </div>
+        </div>
+        <div class="column middle">
+            <p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 20px">Grid View Of COVID-19 Deaths Trend By State:</b><br>The following grid chart exhibits the COVID-19 deaths trend reported in different U.S. states as of 07/15/2020. Apart from New York and New Jersey other states did not report steep rise in COVID-19 deaths so far. However, as shown in the previous chart that there is a possibility to observe similar trend in states like Texas, California, Florida, Arizona and Illinois due to the exponential increase of COVID-19 cases for past one month.<br><br>In the following grid chart , the months are represented in numeric figure on X axis e.g. Feb=2,April=4 and June=6.<br></p>
+            <div id="my_dataviz5" style="background-color:#f6f8f8;color:rgba(53,69,229,0.09);padding:10px;border: 5px outset #021d28"></div>
+        </div>
+    </div>
+    <br>
+    <footer>
+        <p style="background-color:#ffffff;font-family:Helvetica Neue;font-size:130%" align="justify">
+            <b>Reference:</b> For more information about COVID-19 disease please visit <a href="https://www.cdc.gov/coronavirus/2019-nCoV/index.html">https://www.cdc.gov/coronavirus/2019-nCoV/index.html</a>
+            <br>
+            <b>Data Courtesy:</b><a href="https://www.cdc.gov/"> https://www.cdc.gov/</a>
+            <br>
+            <b>Image Courtesy:</b><a href="https://phil.cdc.gov/Details.aspx?pid=23311"> https://phil.cdc.gov/Details.aspx?pid=23311</a>
+            <br>
+            <b>Viz creator:</b> Soumava Dey<br></p>
+    </footer>
+
+</div>
+<script>
+
+    ///////////////////
+
+    // set the dimensions and margins of the graph
+    var margin = {top: 10, right: 30, bottom: 30, left: 60},
+        width = 1200 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
+
+    // append the svg object to the body of the page
+    var svg = d3.select("#my_dataviz")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+    //Read the data
+    d3.csv("data/covid_deaths_usafacts.csv", function(data) {
+
+        // List of groups (here I have one group per column)
+        var allGroup = d3.map(data, function(d){return(d.State)}).keys()
+
+        // add the options to the button
+        d3.select("#selectButton")
+            .selectAll('myOptions')
+            .data(allGroup)
+            .enter()
+            .append('option')
+            .text(function (d) { return d; }) // text showed in the menu
+            .attr("value", function (d) { return d; }) // corresponding value returned by the button
+
+        // A color scale: one color for each group
+
+        var myColor = d3.scaleOrdinal()
+            .domain(allGroup)
+            .range(['#4daf4a','#377eb8','#e41a1c','#984ea3'])
+
+        // Add X axis --> it is a date format
+        var x = d3.scaleLinear()
+            .domain(d3.extent(data, function(d) { return d.Month; }))
+            .range([ 0, width ]);
+        svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x).ticks(7));
+
+        // Add Y axis
+        var y = d3.scaleLinear()
+            .domain([0, d3.max(data, function(d) { return +d.Cases; })])
+            .range([ height, 0 ]);
+        svg.append("g")
+            .call(d3.axisLeft(y));
+
+
+        // Initialize line with first group of the list
+        var line = svg
+            .append('g')
+            .append("path")
+            .datum(data.filter(function(d){return d.name==allGroup[0]}))
+            .attr("d", d3.line()
+                .x(function(d) { return x(d.Month) })
+                .y(function(d) { return y(+d.Cases) })
+            )
+            .attr("stroke", function(d){ return myColor("Alaska") })
+            .style("stroke-width", 4)
+            .style("fill", "none")
+
+
+        // A function that update the chart
+        function update(selectedGroup) {
+
+            // Create new data with the selection?
+            var dataFilter = data.filter(function(d){return d.State==selectedGroup})
+
+            // Give these new data to update line
+            line
+                .datum(dataFilter)
+                .transition()
+                .duration(1000)
+                .attr("d", d3.line()
+                    .x(function(d) { return x(d.Month) })
+                    .y(function(d) { return y(+d.Cases) })
+                )
+                .attr("stroke", function(d){ return myColor(selectedGroup) })
+        }
+
+        // When the button is changed, run the updateChart function
+        d3.select("#selectButton").on("change", function(d) {
+            // recover the option that has been chosen
+            var selectedOption = d3.select(this).property("value")
+            // run the updateChart function with this selected option
+            update(selectedOption)
+        })
+
+    })
+
+
+
+    ////////////////////////////////Beginning of death trend by state code //////////////////////
+
+    // set the dimensions and margins of the graph
+    var margin_line = {top: 30, right: 0, bottom: 30, left: 50},
+        width_line = 210 - margin_line.left - margin_line.right,
+        height_line = 210 - margin_line.top - margin_line.bottom;
+
+    //Read the data
+    d3.csv("data/covid_deaths_usafacts.csv", function(data) {
+
+// group the data: I want to draw one line per group
+        var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
+            .key(function(d) { return d.State;})
+            .entries(data);
+
+// What is the list of groups?
+        allKeys = sumstat.map(function(d){return d.key})
+
+// Add an svg element for each group. The will be one beside each other and will go on the next row when no more room available
+        var svg = d3.select("#my_dataviz5")
+            .selectAll("uniqueChart")
+            .data(sumstat)
+            .enter()
+            .append("svg")
+            .attr("width", width_line + margin_line.left + margin_line.right)
+            .attr("height", height_line + margin_line.top + margin_line.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin_line.left + "," + margin_line.top + ")");
+
+// Add X axis --> it is a date format
+        var x = d3.scaleLinear()
+            .domain(d3.extent(data, function(d) { return d.Month; }))
+            .range([ 0, width_line ]);
+        svg
+            .append("g")
+            .attr("transform", "translate(0," + height_line + ")")
+            .call(d3.axisBottom(x).ticks(3));
+
+//Add Y axis
+        var y = d3.scaleLinear()
+            .domain([0, d3.max(data, function(d) { return +d.Death; })])
+            .range([ height_line, 0 ]);
+        svg.append("g")
+            .call(d3.axisLeft(y).ticks(5));
+
+// color palette
+        var color = d3.scaleOrdinal()
+            .domain(allKeys)
+            .range(['#4daf4a','#377eb8','#e41a1c','#984ea3'])
+
+
+//var color = d3.scaleOrdinal(d3.schemeCategory20);
+// Draw the line
+        svg
+            .append("path")
+            .attr("fill", "none")
+            .attr("stroke", function(d){ return color(d.key) })
+            .attr("stroke-width", 1.9)
+            .attr("d", function(d){
+                return d3.line()
+                    .x(function(d) { return x(d.Month); })
+                    .y(function(d) { return y(+d.Death); })
+                    (d.values)
+            })
+
+// Add titles
+        svg
+            .append("text")
+            .attr("text-anchor", "start")
+            .attr("y", -5)
+            .attr("x", 0)
+            .text(function(d){ return(d.key)})
+            .style("fill", function(d){ return color(d.key) })
+
+    })
+
+    ////////////////////////////////End of death trend by state code //////////////////////
+
+</script>
+</body>
+</html>
