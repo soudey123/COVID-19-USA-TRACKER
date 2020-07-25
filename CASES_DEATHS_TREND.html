@@ -196,19 +196,17 @@
 
     //------------------------1. PREPARATION------------------------//
     //-----------------------------SVG------------------------------//
-    const width = 760;
-    const height = 300;
-    const margin = 30;
-    const padding = 10;
-    const adj = 60;
+    var width = 760;
+    var height = 400;
+    var adj = 30;
     // we are appending SVG first
-    const svg = d3.select("#my_dataviz").append("svg")
+    var svg = d3.select("#my_dataviz").append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
         .attr("viewBox", "-"
             + adj + " -"
             + adj + " "
-            + (width + adj *3) + " "
-            + (height + adj*3))
+            + (width + adj * 3) + " "
+            + (height + adj * 3))
 
         .classed("svg-content", true);
 
