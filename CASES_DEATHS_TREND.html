@@ -198,15 +198,15 @@
     //-----------------------------SVG------------------------------//
     var width = 760;
     var height = 300;
-    var adj = 30;
+    var margin = 30;
     // we are appending SVG first
     var svg = d3.select("#my_dataviz").append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
         .attr("viewBox", "-"
-            + adj + " -"
-            + adj + " "
-            + (width + adj * 5) + " "
-            + (height + adj * 5))
+            + 50 + " -"
+            + 50 + " "
+            + (width + margin * 5) + " "
+            + (height + margin * 5))
 
         .classed("svg-content", true);
 
