@@ -197,7 +197,7 @@
     //------------------------1. PREPARATION------------------------//
     //-----------------------------SVG------------------------------//
     var width = 760;
-    var height = 400;
+    var height = 300;
     var adj = 30;
     // we are appending SVG first
     var svg = d3.select("#my_dataviz").append("svg")
@@ -205,8 +205,8 @@
         .attr("viewBox", "-"
             + adj + " -"
             + adj + " "
-            + (width + adj * 3) + " "
-            + (height + adj * 3))
+            + (width + adj * 5) + " "
+            + (height + adj * 5))
 
         .classed("svg-content", true);
 
