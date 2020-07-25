@@ -218,7 +218,7 @@
 
     //-----------------------------DATA-----------------------------//
     const timeConv = d3.timeParse("%d-%b-%Y");
-    d3.csv("data/line_test.csv", function(data) {
+    d3.csv("data/covid_confirmed_usafacts.csv", function(data) {
         var slices = data.columns.slice(1).map(function(id) {
             return {
                 id: id,
