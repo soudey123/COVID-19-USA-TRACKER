@@ -4,7 +4,6 @@
     <title>CSS Website Layout</title>
     <meta charset="utf-8">
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="js/d3_annotation.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         * {
@@ -80,15 +79,45 @@
             display: block;
             color: #f2f2f2;
             text-align: center;
-            padding: 10px 10px;
+            padding: 14px 16px;
             text-decoration: none;
-            font-size: medium;
         }
 
         /* Change color on hover */
         .topnav a:hover {
             background-color: #ddd;
             color: black;
+        }
+
+        /* Create three unequal columns that floats next to each other */
+        .column {
+            float: left;
+            padding: 10px;
+        }
+
+        /* Left and right column */
+        .column.side {
+            width: 25%;
+        }
+
+        /* Middle column */
+        .column.middle {
+            width: 100%;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+            gap: 0px;
+        }
+
+        /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 600px) {
+            .column.middle {
+                width: 100%;
+            }
         }
 
         .tooltip {
@@ -138,19 +167,21 @@
         </div>
     </div>
 
-            <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 20px">Daily New Cases and New Deaths Trend in USA:</b><br> The following chart shows the number of new COVID-19 cases reported each day in the U.S. since mid-March when the outbreak was officially declared in the United States. Click buttons to switch between the trend of daily new counts and 7-day average data.<br><br> The 7-Day moving average of new cases (current day + 6 preceding days / 7) was calculated to smooth expected variations in daily counts. Additionally, hover over the bars to see the number of new cases by day and check the annotation to explore the recent exponential surge started from mid-June due to aggressive reopening strategy carried out by a few U.S. jurisdictions.<br></p>
-            <div id="my_dataviz4" style="background-color:#f8f0e1;color:#202c42;padding:10px;border: 5px outset #08080e">
+    <div class="row">
+            <p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 20px">Daily New Cases Trend in USA:</b><br> The following chart shows the number of new COVID-19 cases reported each day in the U.S. since mid-March when the outbreak was officially declared in the United States. Click buttons to switch between the trend of daily new counts and 7-day average data.<br><br> The 7-Day moving average of new cases (current day + 6 preceding days / 7) was calculated to smooth expected variations in daily counts. Additionally, hover over the bars to see the number of new cases by day and check the annotation to explore the recent exponential surge started from mid-June due to aggressive reopening strategy carried out by a few U.S. jurisdictions.<br></p>
+            <div id="my_dataviz4" style="background-color:#d7d4cc;color:#202c42;padding:10px;border: 5px outset #08080e">
                 <div><button onclick="update('Cases')">Cases</button>
                      <button onclick="update('Average_7Day_Cases')">Average_7Day</button>
                      <button onclick="update('Deaths')">Deaths</button>
-               </div>
+                     </div>
+            </div>
 
-            <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 20px">COVID-19 Cases Trend By State:</b><br>The following line chart exhibits the COVID-19 cases trend reported in different U.S. states as of 07/15/2020. <br>Going by the trend line, it is observed that the COVID-19 cases reached peak stage in New York, New Jersey and Illinois. Moreover based on the following chart , there is a steep surge observed in Texas , California and Florida state. Arizona and Georgia states also reported recent surge in COVID-19 cases. Hover over the lines to get an interactive clear view.<br></p>
-            <div id="my_dataviz" style="background-color:#f8f0e1;color:rgba(53,69,229,0.09);padding:10px;border: 5px outset #021d28"></div>
+            <p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 20px">COVID-19 Cases Trend By State:</b><br>The following line chart exhibits the COVID-19 cases trend reported in different U.S. states as of 07/15/2020. <br>Going by the trend line, it is observed that the COVID-19 cases reached peak stage in New York, New Jersey and Illinois. Moreover based on the following chart , there is a steep surge observed in Texas , California and Florida state. Arizona and Georgia states also reported recent surge in COVID-19 cases. Hover over the lines to get an interactive clear view.<br></p>
+            <div id="my_dataviz" style="background-color:#f6f8f8;color:rgba(53,69,229,0.09);padding:10px;border: 5px outset #021d28"></div>
 
     <br>
     <footer>
-        <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify">
+        <p style="background-color:#ffffff;font-family:Helvetica Neue;font-size:130%" align="justify">
             <b>Reference:</b> For more information about COVID-19 disease please visit <a href="https://www.cdc.gov/coronavirus/2019-nCoV/index.html">https://www.cdc.gov/coronavirus/2019-nCoV/index.html</a>
             <br>
             <b>Data Courtesy:</b><a href="https://www.cdc.gov/"> https://www.cdc.gov/</a>
@@ -160,8 +191,8 @@
             <b>Viz creator:</b> Soumava Dey<br></p>
     </footer>
 
+</div>
 <script>
-
 
     ////////////////////////////////////// Beginning of USA Daily New Cases Trend code //////////////////////////////
 
@@ -512,8 +543,10 @@
                     .style("fill", function(d) { return color(d.id); })
             })
 
-    });    
+    });
+
 
 </script>
+</div>
 </body>
 </html>
