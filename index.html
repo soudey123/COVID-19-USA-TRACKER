@@ -86,10 +86,10 @@
 </div>
 
         <div class="topnav">
-            <a href="index.html">U.S. MAP</a>
-            <a href="US_STATE_CASES_DEATHS.html">U.S. STATE DATA</a>
-            <a href="Demographic.html">DEMOGRAPHIC DATA</a>
-            <a href="CASES_DEATHS_TREND.html">TREND DATA</a>
+            <a href="index.html"><b>MAP VIEW</b></a>
+            <a href="US_STATE_CASES_DEATHS.html"><b>STATE DATA</b></a>
+            <a href="Demographic.html"><b>DEMOGRAPHIC DATA</b></a>
+            <a href="CASES_DEATHS_TREND.html"><b>TREND DATA</b></a>
         </div>
 
         <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">U.S. State Map Of COVID-19 Cases:</b><br>This map shows COVID-19 cases reported by U.S. states as of 07/15/2019.Latest surge of COVID-19 cases in Texas , Arizona , Florida and Illinois reflected on the map.Hover over the maps to see the following details – a) number of cumulative cases, b) number of cumulative cases per 100k population, c) number of cumulative deaths and d) number of cumulative deaths per 100k population reported in each jurisdiction. Linear legend scale on the top-right side.</p>
@@ -261,7 +261,7 @@
                 .attr("transform", "translate(49,0)");
             
             key.append("text")
-                .attr("x",l_w - 135)
+                .attr("x",l_w - 150)
                 .attr("y",275)
                 .attr("font-family","sans-serif")
                 .attr("font-size",12)
@@ -424,12 +424,12 @@
                 .attr("transform", "translate(49,0)");
             
             key.append("text")
-                .attr("x",l_w - 140)
+                .attr("x",l_w - 150)
                 .attr("y",275)
                 .attr("font-family","sans-serif")
                 .attr("font-size",12)
                 .style("fill", "black")
-                .text("Total np. of Cases By County")
+                .text("Total no. of Cases By County")
 
             var y = d3.scaleLinear()
                 .range([l_h/2, 0])
