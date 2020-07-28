@@ -261,7 +261,7 @@
             {"Name":"Other","Count":1608,"Death_Percentage_Distribution":1.3,"Population_Distribution":2.4}]
     };
 
-    var diameter = 750;
+    var diameter = 600;
     var color = d3.scaleOrdinal(d3.schemeCategory20);
 
 
@@ -517,7 +517,7 @@
         })
         .attr("font-family", "sans-serif")
         .attr("font-size", function(d){
-            return d.r/5;
+            return d.r/6;
         })
         .attr("fill", "white")
         .on("mouseover", function(d) {
@@ -530,14 +530,14 @@
                 .style("top", (d3.event.pageY - 28) + "px")
                 .transition()
                 .duration(200) // ms
-                .style("opacity", .9) // started as 0!
+                .style("opacity", .9)
 
         })
 
         .on("mouseout", function(d) {
             tooltip_bubble1.transition()
                 .duration(300) // ms
-                .style("opacity", 0); // don't care about position!
+                .style("opacity", 0); 
         })
 
 
