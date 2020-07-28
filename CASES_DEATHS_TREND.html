@@ -80,45 +80,15 @@
             display: block;
             color: #f2f2f2;
             text-align: center;
-            padding: 14px 16px;
+            padding: 10px 10px;
             text-decoration: none;
+            font-size: medium;
         }
 
         /* Change color on hover */
         .topnav a:hover {
             background-color: #ddd;
             color: black;
-        }
-
-        /* Create three unequal columns that floats next to each other */
-        .column {
-            float: left;
-            padding: 10px;
-        }
-
-        /* Left and right column */
-        .column.side {
-            width: 25%;
-        }
-
-        /* Middle column */
-        .column.middle {
-            width: 100%;
-        }
-
-        /* Clear floats after the columns */
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-            gap: 0px;
-        }
-
-        /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-        @media screen and (max-width: 600px) {
-            .column.middle {
-                width: 100%;
-            }
         }
 
         .tooltip {
@@ -168,18 +138,15 @@
         </div>
     </div>
 
-    <div class="row">
-            <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 20px">Daily New Cases Trend in USA:</b><br> The following chart shows the number of new COVID-19 cases reported each day in the U.S. since mid-March when the outbreak was officially declared in the United States. Click buttons to switch between the trend of daily new counts and 7-day average data.<br><br> The 7-Day moving average of new cases (current day + 6 preceding days / 7) was calculated to smooth expected variations in daily counts. Additionally, hover over the bars to see the number of new cases by day and check the annotation to explore the recent exponential surge started from mid-June due to aggressive reopening strategy carried out by a few U.S. jurisdictions.<br></p>
+            <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 20px">Daily New Cases and New Deaths Trend in USA:</b><br> The following chart shows the number of new COVID-19 cases reported each day in the U.S. since mid-March when the outbreak was officially declared in the United States. Click buttons to switch between the trend of daily new counts and 7-day average data.<br><br> The 7-Day moving average of new cases (current day + 6 preceding days / 7) was calculated to smooth expected variations in daily counts. Additionally, hover over the bars to see the number of new cases by day and check the annotation to explore the recent exponential surge started from mid-June due to aggressive reopening strategy carried out by a few U.S. jurisdictions.<br></p>
             <div id="my_dataviz4" style="background-color:#f8f0e1;color:#202c42;padding:10px;border: 5px outset #08080e">
                 <div><button onclick="update('Cases')">Cases</button>
-                    <button onclick="update('Average_7Day')">Average_7Day</button></div>
-            </div>
+                     <button onclick="update('Average_7Day_Cases')">Average_7Day</button>
+                     <button onclick="update('Deaths')">Deaths</button>
+               </div>
 
             <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 20px">COVID-19 Cases Trend By State:</b><br>The following line chart exhibits the COVID-19 cases trend reported in different U.S. states as of 07/15/2020. <br>Going by the trend line, it is observed that the COVID-19 cases reached peak stage in New York, New Jersey and Illinois. Moreover based on the following chart , there is a steep surge observed in Texas , California and Florida state. Arizona and Georgia states also reported recent surge in COVID-19 cases. Hover over the lines to get an interactive clear view.<br></p>
             <div id="my_dataviz" style="background-color:#f8f0e1;color:rgba(53,69,229,0.09);padding:10px;border: 5px outset #021d28"></div>
-
-            <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 20px">Grid View Of COVID-19 Deaths Trend By State:</b><br>The following grid chart exhibits the COVID-19 deaths trend reported in different U.S. states as of 07/15/2020. Apart from New York and New Jersey other states did not report steep rise in COVID-19 deaths so far. However, as shown in the previous chart that there is a possibility to observe similar trend in states like Texas, California, Florida, Arizona and Illinois due to the exponential increase of COVID-19 cases for past one month.<br>In the following grid chart , the months are represented in numeric figure on X axis e.g. Feb=2,April=4 and June=6.<br></p>
-            <div id="my_dataviz5" style="background-color:#f8f0e1;color:rgba(53,69,229,0.09);padding:10px;border: 5px outset #021d28"></div>
 
     <br>
     <footer>
@@ -193,8 +160,8 @@
             <b>Viz creator:</b> Soumava Dey<br></p>
     </footer>
 
-</div>
 <script>
+
 
     ////////////////////////////////////// Beginning of USA Daily New Cases Trend code //////////////////////////////
 
@@ -203,33 +170,6 @@
         width_daily = 1200 - margin_daily.left - margin_daily.right,
         height_daily = 600 - margin_daily.top - margin_daily.bottom;
 
-    var annotations_daily = [
-        {
-            note: {
-                title: "COVID cases surge from mid-June",
-                align: "right"
-            },
-            type: d3.annotationCalloutCircle,
-            subject: {
-                radius: 150,
-            },
-            connector: {
-                end: "arrow",        // Can be none, or arrow or dot
-                type: "line",      // ?? don't know what it does
-                lineType : "vertical",    // ?? don't know what it does
-                endScale: 1    // dot size
-            },
-            color: ["red"],
-            x: 950,
-            y: 200,
-            dy: -50,
-            dx: -200
-        }
-    ]
-
-    // Add annotation to the chart
-    var makeAnnotationsRight_daily = d3.annotation()
-        .annotations(annotations_daily)
 
     // append the svg object to the body of the page
     var svg_daily = d3.select("#my_dataviz4")
@@ -237,9 +177,51 @@
         .attr("width", width_daily + margin_daily.left + margin_daily.right)
         .attr("height", height_daily + margin_daily.top + margin_daily.bottom)
         .append("g")
-        .call(makeAnnotationsRight_daily)
+        //.call(makeAnnotationsRight_daily)
         .attr("transform",
             "translate(" + margin_daily.left + "," + margin_daily.top + ")");
+
+    //arrow
+    svg_daily.append("svg:defs").append("svg:marker")
+        .attr("id", "triangle")
+        .attr("refX", 6)
+        .attr("refY", 6)
+        .attr("markerWidth", 30)
+        .attr("markerHeight", 30)
+        .attr("markerUnits","userSpaceOnUse")
+        .attr("orient", "auto")
+        .append("path")
+        .attr("d", "M 0 0 12 6 0 12 3 6")
+        .style("fill", "red");
+
+    //line
+    svg_daily.append("line")
+        .attr("x1", 700)
+        .attr("y1", 160)
+        .attr("x2", 845)
+        .attr("y2", 250)
+
+        .attr("stroke-width", 2)
+        .attr("stroke", "red")
+        .attr("marker-end", "url(#triangle)");
+
+    svg_daily.append("text")
+             .attr("x",485)
+           .attr("y",130)
+           .attr("font-family","sans-serif")
+           .attr("font-size",12)
+           .style("fill", "red")
+           .style("text-decoration", "underline")
+           .text("COVID-19 cases surge in U.S. since mid-June,")
+
+    svg_daily.append("text")
+        .attr("x",485)
+        .attr("y",150)
+        .attr("font-family","sans-serif")
+        .attr("font-size",12)
+        .style("fill", "green")
+        .style("text-decoration", "underline")
+        .text("however the fatality rate improved");
 
     // Initialize the X axis
     var x = d3.scaleBand()
@@ -256,11 +238,9 @@
     var yAxis = svg_daily.append("g")
         .attr("class", "myYaxis")
 
-
     var tooltip = d3.select("#my_dataviz4").append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
-
 
 
     // A function that create / update the plot for a given variable:
@@ -277,8 +257,6 @@
                 .style("text-anchor", "end");
 
 
-
-
             // Add Y axis
             y.domain([0, d3.max(data, function(d) { return +d[selectedVar] }) ]);
             yAxis.transition().duration(1000).call(d3.axisLeft(y));
@@ -289,7 +267,9 @@
                 .data(data)
                 .on("mouseover", function(d) {
                     var html  = "<span><b> Date : </b>" + d.Date+ "</span><br/>" +
-                        "<b style='color: darkred'> Total Cases: <b/>" + d[selectedVar];
+                        "<b style='color: darkred'> Daily Cases: <b/>" + d.Cases + "</span></br>" +
+                        "<span style='color:palevioletred'><b> Avg 7 day cases: </b>" + d.Average_7Day_Cases + "</span></br>" +
+                        "<span style='color:red'><b> Daily Deaths: </b>" + d.Deaths + "</span></br>"
 
                     tooltip.html(html)
                         .style("left", (d3.event.pageX + 25) + "px")
@@ -408,6 +388,51 @@
             .style("text-anchor", "end")
             .text("Total Cases");
 
+//-----------------------------ANNOTATIONS-----------------------------//
+
+        svg.append("circle")
+            .attr("cx", 720)
+            .attr("cy", 100)
+            .attr("r", 60)
+            .style("stroke", "red")
+            .style("stroke-width",1)
+            .style("fill","none");
+
+        //arrow
+        svg.append("svg:defs").append("svg:marker")
+            .attr("id", "triangle")
+            .attr("refX", 6)
+            .attr("refY", 6)
+            .attr("markerWidth", 30)
+            .attr("markerHeight", 30)
+            .attr("markerUnits","userSpaceOnUse")
+            .attr("orient", "auto")
+            .append("path")
+            .attr("d", "M 0 0 12 6 0 12 3 6")
+            .style("fill", "red");
+
+        //line
+        svg.append("line")
+            .attr("x1",  300)
+            .attr("y1", 30)
+            .attr("x2", 650)
+            .attr("y2", 100)
+
+            .attr("stroke-width", 1)
+            .attr("stroke", "red")
+            .attr("marker-end", "url(#triangle)");
+
+        svg.append("text")
+            .attr("x",200)
+            .attr("y",25)
+            .attr("font-family","sans-serif")
+            .attr("font-size",10)
+            .style("fill", "red")
+            .text("COVID-19 cases surge in TX,CA and FL since mid-June");
+
+
+//-----------------------------AXES-----------------------------//
+
 //----------------------------LINES-----------------------------//
         const lines = svg.selectAll("lines")
             .data(slices)
@@ -487,88 +512,7 @@
                     .style("fill", function(d) { return color(d.id); })
             })
 
-    });
-
-
-
-    ////////////////////////////////Beginning of death trend by state code //////////////////////
-
-    // set the dimensions and margins of the graph
-    var margin_line = {top: 30, right: 0, bottom: 30, left: 50},
-        width_line = 210 - margin_line.left - margin_line.right,
-        height_line = 210 - margin_line.top - margin_line.bottom;
-
-    //Read the data
-    d3.csv("data/covid_deaths_usafacts.csv", function(data) {
-
-// group the data: I want to draw one line per group
-        var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
-            .key(function(d) { return d.State;})
-            .entries(data);
-
-// What is the list of groups?
-        allKeys = sumstat.map(function(d){return d.key})
-
-// Add an svg element for each group. The will be one beside each other and will go on the next row when no more room available
-        var svg = d3.select("#my_dataviz5")
-            .selectAll("uniqueChart")
-            .data(sumstat)
-            .enter()
-            .append("svg")
-            .attr("width", width_line + margin_line.left + margin_line.right)
-            .attr("height", height_line + margin_line.top + margin_line.bottom)
-            .append("g")
-            .attr("transform",
-                "translate(" + margin_line.left + "," + margin_line.top + ")");
-
-// Add X axis --> it is a date format
-        var x = d3.scaleLinear()
-            .domain(d3.extent(data, function(d) { return d.Month; }))
-            .range([ 0, width_line ]);
-        svg
-            .append("g")
-            .attr("transform", "translate(0," + height_line + ")")
-            .call(d3.axisBottom(x).ticks(3));
-
-//Add Y axis
-        var y = d3.scaleLinear()
-            .domain([0, d3.max(data, function(d) { return +d.Death; })])
-            .range([ height_line, 0 ]);
-        svg.append("g")
-            .call(d3.axisLeft(y).ticks(5));
-
-// color palette
-        var color = d3.scaleOrdinal()
-            .domain(allKeys)
-            .range(['#4daf4a','#377eb8','#e41a1c','#984ea3'])
-
-
-//var color = d3.scaleOrdinal(d3.schemeCategory20);
-// Draw the line
-        svg
-            .append("path")
-            .attr("fill", "none")
-            .attr("stroke", function(d){ return color(d.key) })
-            .attr("stroke-width", 1.9)
-            .attr("d", function(d){
-                return d3.line()
-                    .x(function(d) { return x(d.Month); })
-                    .y(function(d) { return y(+d.Death); })
-                    (d.values)
-            })
-
-// Add titles
-        svg
-            .append("text")
-            .attr("text-anchor", "start")
-            .attr("y", -5)
-            .attr("x", 0)
-            .text(function(d){ return(d.key)})
-            .style("fill", function(d){ return color(d.key) })
-
-    })
-
-    ////////////////////////////////End of death trend by state code //////////////////////
+    });    
 
 </script>
 </body>
