@@ -79,9 +79,8 @@
             display: block;
             color: #f2f2f2;
             text-align: center;
-            padding: 10px 10px;
+            padding: 14px 16px;
             text-decoration: none;
-            font-size: medium;
         }
 
         /* Change color on hover */
@@ -89,6 +88,23 @@
             background-color: #ddd;
             color: black;
         }
+
+        /* Create three unequal columns that floats next to each other */
+        .column {
+            float: left;
+            padding: 10px;
+        }
+
+        /* Left and right column */
+        .column.side {
+            width: 25%;
+        }
+
+        /* Middle column */
+        .column.middle {
+            width: 100%;
+        }
+
         /* Clear floats after the columns */
         .row:after {
             content: "";
