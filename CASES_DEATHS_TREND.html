@@ -229,9 +229,9 @@
     //line
     svg_daily.append("line")
         .attr("x1", 700)
-        .attr("y1", 160)
+        .attr("y1", 85)
         .attr("x2", 845)
-        .attr("y2", 250)
+        .attr("y2", 175)
 
         .attr("stroke-width", 2)
         .attr("stroke", "red")
@@ -239,7 +239,7 @@
 
     svg_daily.append("text")
              .attr("x",485)
-           .attr("y",130)
+           .attr("y",60)
            .attr("font-family","sans-serif")
            .attr("font-size",12)
            .style("fill", "red")
@@ -248,7 +248,7 @@
 
     svg_daily.append("text")
         .attr("x",485)
-        .attr("y",150)
+        .attr("y",75)
         .attr("font-family","sans-serif")
         .attr("font-size",12)
         .style("fill", "green")
@@ -285,7 +285,7 @@
             x.domain(data.map(function(d) { return d.Date; }))
             xAxis.transition().duration(1000).call(d3.axisBottom(x))
                 .selectAll("text")
-                .attr("transform", "translate(-15,10)rotate(-90)")
+                .attr("transform", "translate(-15,10)rotate(-45)")
                 .style("text-anchor", "end");
 
 
