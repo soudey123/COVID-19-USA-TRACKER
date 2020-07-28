@@ -466,6 +466,35 @@
         .attr("width", diameter)
         .attr("height", diameter)
         .attr("class", "bubble");
+    
+    //line
+    svg_bubble1.append("line")
+        .attr("x1", 460)
+        .attr("y1", 390)
+        .attr("x2", 450)
+        .attr("y2", 350)
+
+        .attr("stroke-width", 1)
+        .attr("stroke", "green")
+        .attr("marker-end", "url(#triangle)");
+
+    svg_bubble1.append("text")
+        .attr("x",430)
+        .attr("y",400)
+        .attr("font-family","sans-serif")
+        .attr("font-size",12)
+        .style("fill", "green")
+        .style("text-decoration", "underline")
+        .text("Population reported highest");
+
+    svg_bubble1.append("text")
+        .attr("x",450)
+        .attr("y",420)
+        .attr("font-family","sans-serif")
+        .attr("font-size",12)
+        .style("fill", "green")
+        .style("text-decoration", "underline")
+        .text("mortality rate distribution");
 
     var tooltip_bubble1 = d3.select("#my_dataviz7").append("div")
         .attr("class", "tooltip")
