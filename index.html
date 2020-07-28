@@ -49,36 +49,7 @@
             color: black;
         }
 
-        /* Create three unequal columns that floats next to each other */
-        .column {
-            float: left;
-            padding: 10px;
-        }
 
-        /* Left and right column */
-        .column.side {
-            width: 25%;
-        }
-
-        /* Middle column */
-        .column.middle {
-            width: 100%;
-        }
-
-        /* Clear floats after the columns */
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-            gap: 0px;
-        }
-
-        /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-        @media screen and (max-width: 600px) {
-            .column.middle {
-                width: 100%;
-            }
-        }
 
         .tooltip {
             placement: auto;
@@ -288,7 +259,14 @@
                 .attr("height", l_h/2)
                 .style("fill", "url(#gradient)")
                 .attr("transform", "translate(49,0)");
-
+            
+            key.append("text")
+                .attr("x",l_w - 120)
+                .attr("y",275)
+                .attr("font-family","sans-serif")
+                .attr("font-size",12)
+                .style("fill", "black")
+                .text("Total Cases By State")
 
             var y = d3.scaleLinear()
                 .range([l_h/2, 0])
@@ -444,7 +422,14 @@
                 .attr("height", l_h/2)
                 .style("fill", "url(#gradient)")
                 .attr("transform", "translate(49,0)");
-
+            
+            key.append("text")
+                .attr("x",l_w - 120)
+                .attr("y",275)
+                .attr("font-family","sans-serif")
+                .attr("font-size",12)
+                .style("fill", "black")
+                .text("Total Cases By County")
 
             var y = d3.scaleLinear()
                 .range([l_h/2, 0])
