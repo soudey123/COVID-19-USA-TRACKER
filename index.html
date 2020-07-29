@@ -157,7 +157,7 @@
             .style("opacity", 0);
 
         // Load GeoJSON data and merge with states data
-        d3.json("json/us-states.json", function(json) {
+        d3.json("https://eric.clst.org/assets/wiki/uploads/Stuff/gz_2010_us_040_00_500k.json", function(json) {
 
             // Loop through each state data value in the .csv file
             for (var i = 0; i < data.length; i++) {
