@@ -275,11 +275,7 @@
                 .attr("height", l_h/2)
                 .style("fill", "url(#gradient)")
                 .attr("transform", "translate(49,0)");
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> 1ef13865d33a3c09025789d01f069679ba264819
             key.append("text")
                 .attr("x",l_w - 140)
                 .attr("y",275)
@@ -411,7 +407,6 @@
 
             // add a legend
             var l_w = 140, l_h = 500;
-<<<<<<< HEAD
 
             var key = d3.select("#my_dataviz1")
                 .append("svg")
@@ -456,7 +451,6 @@
                 .range([l_h/2, 0])
                 .domain([0, maxVal]);
 
-=======
 
             var key = d3.select("#my_dataviz1")
                 .append("svg")
@@ -501,7 +495,7 @@
                 .range([l_h/2, 0])
                 .domain([0, maxVal]);
 
->>>>>>> 1ef13865d33a3c09025789d01f069679ba264819
+
             var yAxis = d3.axisRight(y);
 
             key.append("g")
