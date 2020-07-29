@@ -4,7 +4,6 @@
     <title>U.S. Demographic </title>
     <meta charset="utf-8">
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="js/d3_annotation.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         * {
@@ -50,36 +49,6 @@
             color: black;
         }
 
-        /* Create three unequal columns that floats next to each other */
-        .column {
-            float: left;
-            padding: 10px;
-        }
-
-        /* Left and right column */
-        .column.side {
-            width: 25%;
-        }
-
-        /* Middle column */
-        .column.middle {
-            width: 100%;
-        }
-
-        /* Clear floats after the columns */
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-            gap: 0px;
-        }
-
-        /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-        @media screen and (max-width: 600px) {
-            .column.middle {
-                width: 100%;
-            }
-        }
 
         .tooltip {
             placement: auto;
@@ -123,33 +92,17 @@
             <a href="CASES_DEATHS_TREND.html"><b>TREND DATA</b></a>
         </div>
     </div>
-<<<<<<< HEAD
+
     <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">COVID-19 Deaths by Age and Gender:</b><br> The following interactive chart shows the cumulative COVID-19 deaths by sex and age group for the United States of 07/15/2020. Click the buttons to switch between two sets of data representation.<br>It illustrates a correlation that the COVID-19 transmitted disease is more fatal to older adults especially between age group "75-84 years" for Male and age group "85 years and above" for Female.<br></p>
     <div id="my_dataviz1" style="background-color:#f8f0e1;color:#eaba98;padding:10px;border: 5px outset #08080e">
         <div><button type="button" onclick="update('Male')">Male</button>
             <button type="button" onclick="update('Female')">Female</button></div>
     </div>
-=======
-            <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">COVID-19 Deaths by Age and Gender:</b><br> The following interactive chart shows the cumulative COVID-19 deaths by sex and age group for the United States of 07/15/2020. Click the buttons to switch between two sets of data representation.<br>It illustrates a correlation that the COVID-19 transmitted disease is more fatal to older adults especially between age group "75-84 years" for Male and age group "85 years and above" for Female.<br></p>
-            <div id="my_dataviz1" style="background-color:#f8f0e1;color:#eaba98;padding:10px;border: 5px outset #08080e">
-                <div><button type="button" onclick="update('Male')">Male</button>
-                    <button type="button" onclick="update('Female')">Female</button></div>
-            </div>
-            <br>
             <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">COVID-19 Deaths by Count in different races:</b><br> The following bubble chart shows the distribution of COVID-19 deaths by race and Hispanic origin as of 07/15/2020 which creates an avenue to perform further analysis about the differential impact of COVID-19 deaths on these populations.<br>Hover over the bubbles to see addition details about those demographics as such a) death distribution percentage,b) population distribution percentage. It has been observed that there is a correlation between death and population percentage. <br>For instance, COVID-19 fatality reported more in White American population as compared to other minorities. It might be due to the fact that White American are the majority as they represent 60.4% of the U.S. population followed by Hispanic/Latino and Black/African American .However, there are more COVID-19 deaths observed in Black/African American community than that of Hispanic/Latino community though the latter has higher population density as compared to the former.<br></p>
             <div id="my_dataviz6" style="background-color:#f8f0e1;color:#cfffff;padding:10px;border: 5px outset #080817"></div>
-            <br>
             <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">COVID-19 Deaths by Mortality Distribution in different races:</b><br>In order to continue further analysis about the COVID-19 deaths impact on these population, the following bubble chart has been crafted to show the mortality rate distribution of COVID-19 deaths reported in different communities.Hover over the bubbles to see addition details about those demographics which are not covered in the bubble chart mentioned above.<br>Based on the mortality rate distribution, the highest death percentage distribution observed in the Black/African American community. Here is a brief demographic analysis summary derived from the two bubble charts:<br> 1) White American community reported highest COVID-19 deaths by count,<br> 2) Black/African community reported highest COVID-19 mortality rate per 100k population, <br> 3) although American Indian/Alaska Native reported lowest COVID-19 deaths by count but in general the COVID-19 mortality rate is higher compared to that of White American, Asian and Other communities.<br></p>
             <div id="my_dataviz7" style="background-color:#f8f0e1;color:#cfffff;padding:10px;border: 5px outset #080817"></div>
-            <br>
->>>>>>> 1ef13865d33a3c09025789d01f069679ba264819
-    <br>
-    <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">COVID-19 Deaths by Count in different races:</b><br> The following bubble chart shows the distribution of COVID-19 deaths by race and Hispanic origin as of 07/15/2020 which creates an avenue to perform further analysis about the differential impact of COVID-19 deaths on these populations.<br>Hover over the bubbles to see addition details about those demographics as such a) death distribution percentage,b) population distribution percentage. It has been observed that there is a correlation between death and population percentage. <br>For instance, COVID-19 fatality reported more in White American population as compared to other minorities. It might be due to the fact that White American are the majority as they represent 60.4% of the U.S. population followed by Hispanic/Latino and Black/African American .However, there are more COVID-19 deaths observed in Black/African American community than that of Hispanic/Latino community though the latter has higher population density as compared to the former.<br></p>
-    <div id="my_dataviz6" style="background-color:#f8f0e1;color:#cfffff;padding:10px;border: 5px outset #080817"></div>
-    <br>
-    <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">COVID-19 Deaths by Mortality Distribution in different races:</b><br>In order to continue further analysis about the COVID-19 deaths impact on these population, the following bubble chart has been crafted to show the mortality rate distribution of COVID-19 deaths reported in different communities.Hover over the bubbles to see addition details about those demographics which are not covered in the bubble chart mentioned above.<br>Based on the mortality rate distribution, the highest death percentage distribution observed in the Black/African American community. Here is a brief demographic analysis summary derived from the two bubble charts:<br> 1) White American community reported highest COVID-19 deaths by count,<br> 2) Black/African community reported highest COVID-19 mortality rate per 100k population, <br> 3) although American Indian/Alaska Native reported lowest COVID-19 deaths by count but in general the COVID-19 mortality rate is higher compared to that of White American, Asian and Other communities.<br></p>
-    <div id="my_dataviz7" style="background-color:#f8f0e1;color:#cfffff;padding:10px;border: 5px outset #080817"></div>
-    <br>
+
     <br>
     <footer>
         <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify">
@@ -314,11 +267,7 @@
         .attr("stroke-width", 1)
         .attr("stroke", "green")
         .attr("marker-end", "url(#triangle)");
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 1ef13865d33a3c09025789d01f069679ba264819
     svg_bubble.append("text")
         .attr("x",5)
         .attr("y",500)
@@ -474,8 +423,6 @@
     var diameter = 600;
     var color = d3.scaleOrdinal(d3.schemeCategory20);
 
-
-
     var bubble1 = d3.pack(dataset)
         .size([diameter, diameter])
         .padding(2);
@@ -485,64 +432,35 @@
         .attr("width", diameter)
         .attr("height", diameter)
         .attr("class", "bubble");
+
+    //line
+    svg_bubble1.append("line")
+        .attr("x1", 460)
+        .attr("y1", 390)
+        .attr("x2", 440)
+        .attr("y2", 335)
+        .attr("stroke-width", 1)
+        .attr("stroke", "red")
+        .attr("marker-end", "url(#triangle)");
+
+    svg_bubble1.append("text")
+        .attr("x",430)
+        .attr("y",400)
+        .attr("font-family","sans-serif")
+        .attr("font-size",12)
+        .style("fill", "red")
+        .style("text-decoration", "underline")
+        .text("Population reported highest");
+
+    svg_bubble1.append("text")
+        .attr("x",450)
+        .attr("y",420)
+        .attr("font-family","sans-serif")
+        .attr("font-size",12)
+        .style("fill", "red")
+        .style("text-decoration", "underline")
+        .text("mortality rate distribution");
     
-    //line
-    svg_bubble1.append("line")
-        .attr("x1", 460)
-        .attr("y1", 390)
-        .attr("x2", 450)
-        .attr("y2", 350)
-
-        .attr("stroke-width", 1)
-        .attr("stroke", "green")
-        .attr("marker-end", "url(#triangle)");
-
-    svg_bubble1.append("text")
-        .attr("x",430)
-        .attr("y",400)
-        .attr("font-family","sans-serif")
-        .attr("font-size",12)
-        .style("fill", "green")
-        .style("text-decoration", "underline")
-        .text("Population reported highest");
-
-    svg_bubble1.append("text")
-        .attr("x",450)
-        .attr("y",420)
-        .attr("font-family","sans-serif")
-        .attr("font-size",12)
-        .style("fill", "green")
-        .style("text-decoration", "underline")
-        .text("mortality rate distribution");
-
-    //line
-    svg_bubble1.append("line")
-        .attr("x1", 460)
-        .attr("y1", 390)
-        .attr("x2", 450)
-        .attr("y2", 350)
-
-        .attr("stroke-width", 1)
-        .attr("stroke", "green")
-        .attr("marker-end", "url(#triangle)");
-
-    svg_bubble1.append("text")
-        .attr("x",430)
-        .attr("y",400)
-        .attr("font-family","sans-serif")
-        .attr("font-size",12)
-        .style("fill", "green")
-        .style("text-decoration", "underline")
-        .text("Population reported highest");
-
-    svg_bubble1.append("text")
-        .attr("x",450)
-        .attr("y",420)
-        .attr("font-family","sans-serif")
-        .attr("font-size",12)
-        .style("fill", "green")
-        .style("text-decoration", "underline")
-        .text("mortality rate distribution");
 
     var tooltip_bubble1 = d3.select("#my_dataviz7").append("div")
         .attr("class", "tooltip")
@@ -565,7 +483,6 @@
             console.log(d.x);
             return "translate(" + d.x + "," + d.y + ")";
         });
-
 
     node1.append("circle")
         .attr("r", function(d) {
@@ -622,11 +539,8 @@
         .on("mouseout", function(d) {
             tooltip_bubble1.transition()
                 .duration(300) // ms
-<<<<<<< HEAD
                 .style("opacity", 0);
-=======
-                .style("opacity", 0); 
->>>>>>> 1ef13865d33a3c09025789d01f069679ba264819
+
         })
 
 
@@ -669,7 +583,6 @@
     ////////////////////////////////End of Demographic analysis#3 code //////////////////////
 
 </script>
-
 </body>
 <html>
 

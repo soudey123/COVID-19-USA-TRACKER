@@ -85,13 +85,15 @@
     <h1 style="text-align:center;color:floralwhite;font-family:courier;font-size:250%">COVID-19 USA DATA TRACKER</h1>
 </div>
 
-<<<<<<< HEAD
-<div class="topnav">
-    <a href="index.html"><b>MAP VIEW</b></a>
-    <a href="US_STATE_CASES_DEATHS.html"><b>STATE DATA</b></a>
-    <a href="Demographic.html"><b>DEMOGRAPHIC DATA</b></a>
-    <a href="CASES_DEATHS_TREND.html"><b>TREND DATA</b></a>
-</div>
+<div class="body">
+    <div class="container">
+        <div class="topnav">
+            <a href="index.html"><b>MAP VIEW</b></a>
+            <a href="US_STATE_CASES_DEATHS.html"><b>STATE DATA</b></a>
+            <a href="Demographic.html"><b>DEMOGRAPHIC DATA</b></a>
+            <a href="CASES_DEATHS_TREND.html"><b>TREND DATA</b></a>
+        </div>
+    </div>
 
 <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">U.S. State Map Of COVID-19 Cases:</b><br>This map shows COVID-19 cases reported by U.S. states as of 07/15/2019.Latest surge of COVID-19 cases in Texas , Arizona , Florida and Illinois reflected on the map.Hover over the maps to see the following details – a) number of cumulative cases, b) number of cumulative cases per 100k population, c) number of cumulative deaths and d) number of cumulative deaths per 100k population reported in each jurisdiction. Linear legend scale on the top-right side.</p>
 <div id="my_dataviz" style="background-color:#f8f0e1;color:#202c42;padding:10px;border: 5px outset #08080e" >
@@ -99,21 +101,6 @@
 <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">U.S. County Map Of COVID-19 Cases:</b><br>This map shows COVID-19 cases reported by U.S. counties as of 07/15/2019. High percentage of COVID-19 cases noticed in counties like Los Angeles(California), Maricopa(Arizona), Kings(New York), Queens(New York), Harris(Texas), Cook(Illinois) and Miami-Dade(Florida).<br> Hover over the maps to see the total number of cumulative cases in each county till the above-mentioned date. Legend scale on the top-right side shows the linear variation of total COVID-19 cases reported in U.S. states.</p>
 <div id="my_dataviz1" style="background-color:#f8f0e1;color:#202c42;padding:10px;border: 5px outset #08080e" >
 </div>
-=======
-        <div class="topnav">
-            <a href="index.html"><b>MAP VIEW</b></a>
-            <a href="US_STATE_CASES_DEATHS.html"><b>STATE DATA</b></a>
-            <a href="Demographic.html"><b>DEMOGRAPHIC DATA</b></a>
-            <a href="CASES_DEATHS_TREND.html"><b>TREND DATA</b></a>
-        </div>
-
-        <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">U.S. State Map Of COVID-19 Cases:</b><br>This map shows COVID-19 cases reported by U.S. states as of 07/15/2019.Latest surge of COVID-19 cases in Texas , Arizona , Florida and Illinois reflected on the map.Hover over the maps to see the following details – a) number of cumulative cases, b) number of cumulative cases per 100k population, c) number of cumulative deaths and d) number of cumulative deaths per 100k population reported in each jurisdiction. Linear legend scale on the top-right side.</p>
-        <div id="my_dataviz" style="background-color:#f8f0e1;color:#202c42;padding:10px;border: 5px outset #08080e" >
-        </div>
-        <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">U.S. County Map Of COVID-19 Cases:</b><br>This map shows COVID-19 cases reported by U.S. counties as of 07/15/2019. High percentage of COVID-19 cases noticed in counties like Los Angeles(California), Maricopa(Arizona), Kings(New York), Queens(New York), Harris(Texas), Cook(Illinois) and Miami-Dade(Florida).<br> Hover over the maps to see the total number of cumulative cases in each county till the above-mentioned date. Legend scale on the top-right side shows the linear variation of total COVID-19 cases reported in U.S. states.</p>
-        <div id="my_dataviz1" style="background-color:#f8f0e1;color:#202c42;padding:10px;border: 5px outset #08080e" >
-        </div>
->>>>>>> 1ef13865d33a3c09025789d01f069679ba264819
 <br>
 <footer>
     <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify">
@@ -125,6 +112,7 @@
         <br>
         <b>Viz creator:</b> Soumava Dey<br></p>
 </footer>
+</div>
 
 <script type="text/javascript">
 
@@ -447,49 +435,6 @@
                 .style("fill", "black")
                 .text("Total no. of Cases By County")
 
-            var y = d3.scaleLinear()
-                .range([l_h/2, 0])
-                .domain([0, maxVal]);
-
-
-            var key = d3.select("#my_dataviz1")
-                .append("svg")
-                .attr("width", l_w)
-                .attr("height", l_h)
-                .attr("class", "legend");
-
-            var legend = key.append("defs")
-                .append("svg:linearGradient")
-                .attr("id", "gradient")
-                .attr("x1", "100%")
-                .attr("y1", "0%")
-                .attr("x2", "100%")
-                .attr("y2", "100%")
-                .attr("spreadMethod", "pad");
-
-            legend.append("stop")
-                .attr("offset", "0%")
-                .attr("stop-color", highColor)
-                .attr("stop-opacity", 1);
-
-            legend.append("stop")
-                .attr("offset", "100%")
-                .attr("stop-color", lowColor)
-                .attr("stop-opacity", 1);
-
-            key.append("rect")
-                .attr("width", l_w - 100)
-                .attr("height", l_h/2)
-                .style("fill", "url(#gradient)")
-                .attr("transform", "translate(49,0)");
-            
-            key.append("text")
-                .attr("x",l_w - 140)
-                .attr("y",275)
-                .attr("font-family","sans-serif")
-                .attr("font-size",10)
-                .style("fill", "black")
-                .text("Total no. of Cases By County")
 
             var y = d3.scaleLinear()
                 .range([l_h/2, 0])
