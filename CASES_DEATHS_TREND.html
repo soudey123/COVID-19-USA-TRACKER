@@ -4,7 +4,6 @@
     <title>CSS Website Layout</title>
     <meta charset="utf-8">
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="js/d3_annotation.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         * {
@@ -80,8 +79,9 @@
             display: block;
             color: #f2f2f2;
             text-align: center;
-            padding: 14px 16px;
+            padding: 5px 12px;
             text-decoration: none;
+            font-size: medium;
         }
 
         /* Change color on hover */
@@ -158,287 +158,409 @@
 <div class="header">
     <h1 style="text-align:center;color:floralwhite;font-family:courier;font-size:250%">COVID-19 USA DATA TRACKER</h1>
 </div>
-<br>
-
 <div class="body">
     <div class="container">
         <div class="topnav">
-            <a href="index.html">HOME</a>
-            <a href="US_STATE_CASES_DEATHS.html">U.S. STATE DATA</a>
-            <a href="Demographic.html">DEMOGRAPHIC DATA</a>
-            <a href="CASES_DEATHS_TREND.html">TREND DATA</a>
+            <a href="index.html"><b>MAP VIEW</b></a>
+            <a href="US_STATE_CASES_DEATHS.html"><b>STATE DATA</b></a>
+            <a href="Demographic.html"><b>DEMOGRAPHIC DATA</b></a>
+            <a href="CASES_DEATHS_TREND.html"><b>TREND DATA</b></a>
         </div>
     </div>
 
     <div class="row">
-        <div class="column middle">
-            <p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 20px">COVID-19 Cases Trend By State:</b><br>The following line chart exhibits the COVID-19 cases trend reported in different U.S. states as of 07/15/2020. <br><br>Going by the trend line, it is observed that the COVID-19 cases reached peak stage in New York, New Jersey and Illinois. Moreover based on the following chart , there is a steep surge observed in Texas , California and Florida state. Arizona and Georgia states also reported recent surge in COVID-19 cases. Hover over the lines to get an interactive clear view.<br></p>
-            <div id="my_dataviz" style="background-color:#f6f8f8;color:rgba(53,69,229,0.09);padding:10px;border: 5px outset #021d28">
+        <p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">Daily New Cases and Deaths Trend in USA:</b><br> The following chart shows the number of new COVID-19 cases reported each day in the U.S. since mid-March when the outbreak was officially declared in the United States. Click buttons to switch between the trend of daily new counts and 7-day average data.The 7-Day moving average of new cases (current day + 6 preceding days / 7) was calculated to smooth expected variations in daily counts. Additionally, hover over the bars to see the number of new cases by day and check the annotation to explore the recent exponential surge started from mid-June due to aggressive reopening strategy carried out by a few U.S. jurisdictions.<br></p>
+        <div id="my_dataviz4" style="background-color:#d7d4cc;color:#202c42;padding:10px;border: 5px outset #08080e">
+            <div><button onclick="update('Cases')">Cases</button>
+                <button onclick="update('Average_7Day_Cases')">Average_7Day</button>
+                <button onclick="update('Deaths')">Deaths</button>
             </div>
         </div>
-        <div class="column middle">
-            <p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 20px">Grid View Of COVID-19 Deaths Trend By State:</b><br>The following grid chart exhibits the COVID-19 deaths trend reported in different U.S. states as of 07/15/2020. Apart from New York and New Jersey other states did not report steep rise in COVID-19 deaths so far. However, as shown in the previous chart that there is a possibility to observe similar trend in states like Texas, California, Florida, Arizona and Illinois due to the exponential increase of COVID-19 cases for past one month.<br><br>In the following grid chart , the months are represented in numeric figure on X axis e.g. Feb=2,April=4 and June=6.<br></p>
-            <div id="my_dataviz5" style="background-color:#f6f8f8;color:rgba(53,69,229,0.09);padding:10px;border: 5px outset #021d28"></div>
-        </div>
+
+        <p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">COVID-19 Cases Trend By State:</b><br>The following line chart exhibits the COVID-19 cases trend reported in different U.S. states as of 07/15/2020. <br>Going by the trend line, it is observed that the COVID-19 cases reached peak stage in New York, New Jersey and Illinois. Moreover based on the following chart , there is a steep surge observed in Texas , California and Florida state. Arizona and Georgia states also reported recent surge in COVID-19 cases. Hover over the lines to get an interactive clear view.<br></p>
+        <div id="my_dataviz" style="background-color:#f6f8f8;color:rgba(53,69,229,0.09);padding:10px;border: 5px outset #021d28"></div>
+
+        <br>
+        <footer>
+            <p style="background-color:#ffffff;font-family:Helvetica Neue;font-size:130%" align="justify">
+                <b>Reference:</b> For more information about COVID-19 disease please visit <a href="https://www.cdc.gov/coronavirus/2019-nCoV/index.html">https://www.cdc.gov/coronavirus/2019-nCoV/index.html</a>
+                <br>
+                <b>Data Courtesy:</b><a href="https://www.cdc.gov/"> https://www.cdc.gov/</a>
+                <br>
+                <b>Image Courtesy:</b><a href="https://phil.cdc.gov/Details.aspx?pid=23311"> https://phil.cdc.gov/Details.aspx?pid=23311</a>
+                <br>
+                <b>Viz creator:</b> Soumava Dey<br></p>
+        </footer>
+
     </div>
-    <br>
-    <footer>
-        <p style="background-color:#ffffff;font-family:Helvetica Neue;font-size:130%" align="justify">
-            <b>Reference:</b> For more information about COVID-19 disease please visit <a href="https://www.cdc.gov/coronavirus/2019-nCoV/index.html">https://www.cdc.gov/coronavirus/2019-nCoV/index.html</a>
-            <br>
-            <b>Data Courtesy:</b><a href="https://www.cdc.gov/"> https://www.cdc.gov/</a>
-            <br>
-            <b>Image Courtesy:</b><a href="https://phil.cdc.gov/Details.aspx?pid=23311"> https://phil.cdc.gov/Details.aspx?pid=23311</a>
-            <br>
-            <b>Viz creator:</b> Soumava Dey<br></p>
-    </footer>
+    <script>
 
-</div>
-<script>
+        ////////////////////////////////////// Beginning of USA Daily New Cases Trend code //////////////////////////////
 
-    //------------------------1. PREPARATION------------------------//
-    //-----------------------------SVG------------------------------//
-    const width = 960;
-    const height = 400;
-    const margin = 30;
-    const padding = 10;
-    const adj = 60;
-    // we are appending SVG first
-    const svg = d3.select("#my_dataviz").append("svg")
-        .attr("preserveAspectRatio", "xMinYMin meet")
-        .attr("viewBox", "-"
-            + adj + " -"
-            + adj + " "
-            + (width + adj *3) + " "
-            + (height + adj*3))
+        // set the dimensions and margins of the graph
+        var margin_daily = {top: 40, right: 20, bottom: 70, left: 40},
+            width_daily = 1200 - margin_daily.left - margin_daily.right,
+            height_daily = 400 - margin_daily.top - margin_daily.bottom;
 
-        .classed("svg-content", true);
 
-    var color = d3.scaleOrdinal(d3.schemeCategory20);
+        // append the svg object to the body of the page
+        var svg_daily = d3.select("#my_dataviz4")
+            .append("svg")
+            .attr("width", width_daily + margin_daily.left + margin_daily.right)
+            .attr("height", height_daily + margin_daily.top + margin_daily.bottom)
+            .append("g")
+            //.call(makeAnnotationsRight_daily)
+            .attr("transform",
+                "translate(" + margin_daily.left + "," + margin_daily.top + ")");
 
-    //-----------------------------DATA-----------------------------//
-    const timeConv = d3.timeParse("%d-%b-%Y");
-    d3.csv("data/line_test.csv", function(data) {
-        var slices = data.columns.slice(1).map(function(id) {
-            return {
-                id: id,
-                values: data.map(function(d){
-                    return {
-                        date: timeConv(d.date),
-                        measurement: +d[id]
-                    };
-                })
-            };
-        });
+        //arrow
+        svg_daily.append("svg:defs").append("svg:marker")
+            .attr("id", "triangle")
+            .attr("refX", 6)
+            .attr("refY", 6)
+            .attr("markerWidth", 30)
+            .attr("markerHeight", 30)
+            .attr("markerUnits","userSpaceOnUse")
+            .attr("orient", "auto")
+            .append("path")
+            .attr("d", "M 0 0 12 6 0 12 3 6")
+            .style("fill", "red");
 
-        console.log(slices)
+        // circle
+
+        svg_daily.append("circle")
+            .attr("cx", 990)
+            .attr("cy", 150)
+            .attr("r", 140)
+            .style("stroke", "red")
+            .style("stroke-width",4)
+            .style("stroke-dasharray", ("3, 3"))
+            .style("fill","none");
+
+
+        //line
+        svg_daily.append("line")
+            .attr("x1", 700)
+            .attr("y1", 75)
+            .attr("x2", 840)
+            .attr("y2", 125)
+
+            .attr("stroke-width", 2)
+            .attr("stroke", "red")
+            .attr("marker-end", "url(#triangle)");
+
+        svg_daily.append("text")
+            .attr("x",485)
+            .attr("y",60)
+            .attr("font-family","sans-serif")
+            .attr("font-size",12)
+            .style("fill", "red")
+            .style("text-decoration", "underline")
+            .text("COVID-19 cases surge in U.S. since mid-June,")
+
+        svg_daily.append("text")
+            .attr("x",485)
+            .attr("y",75)
+            .attr("font-family","sans-serif")
+            .attr("font-size",12)
+            .style("fill", "green")
+            .style("text-decoration", "underline")
+            .text("however the fatality rate improved");
+
+        // Initialize the X axis
+        var x = d3.scaleBand()
+            .range([ 0, width_daily ])
+            .padding(0.3);
+        var xAxis = svg_daily.append("g")
+            .attr("transform", "translate(0," + height_daily + ")")
+
+
+
+        // Initialize the Y axis
+        var y = d3.scaleLinear()
+            .range([ height_daily, 0]);
+        var yAxis = svg_daily.append("g")
+            .attr("class", "myYaxis")
+
+        var tooltip = d3.select("#my_dataviz4").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+
+        // A function that create / update the plot for a given variable:
+        function update(selectedVar) {
+
+            // Parse the Data
+            d3.csv("data/US_Daily_New_Case.csv", function(data) {
+
+                // X axis
+                x.domain(data.map(function(d) { return d.Date; }))
+                xAxis.transition().duration(1000).call(d3.axisBottom(x))
+                    .selectAll("text")
+                    .attr("transform", "translate(-15,10)rotate(-90)")
+                    .style("text-anchor", "end");
+
+
+                // Add Y axis
+                y.domain([0, d3.max(data, function(d) { return +d[selectedVar] }) ]);
+                yAxis.transition().duration(1000).call(d3.axisLeft(y));
+
+
+                // variable u: map data to existing bars
+                var u3 = svg_daily.selectAll("rect")
+                    .data(data)
+                    .on("mouseover", function(d) {
+                        var html  = "<span><b> Date : </b>" + d.Date+ "</span><br/>" +
+                            "<b style='color: darkred'> Daily Cases: <b/>" + d.Cases + "</span></br>" +
+                            "<span style='color:palevioletred'><b> Avg 7 day cases: </b>" + d.Average_7Day_Cases + "</span></br>" +
+                            "<span style='color:red'><b> Daily Deaths: </b>" + d.Deaths + "</span></br>"
+
+                        tooltip.html(html)
+                            .style("left", (d3.event.pageX + 25) + "px")
+                            .style("top", (d3.event.pageY - 28) + "px")
+                            .transition()
+                            .duration(200) // ms
+                            .style("opacity", .9) // started as 0!
+
+                    })
+
+                    // fade out tooltip on mouse out
+                    .on("mouseout", function(d) {
+                        tooltip.transition()
+                            .duration(500)
+                            .style("opacity", 0);
+                    })
+
+                // update bars
+                u3
+                    .enter()
+                    .append("rect")
+                    .merge(u3)
+                    .transition()
+                    .duration(1000)
+                    .attr("x", function(d) { return x(d.Date); })
+                    .attr("y", function(d) { return y(d[selectedVar]); })
+                    .attr("width", x.bandwidth())
+                    .attr("height", function(d) { return height_daily - y(d[selectedVar]); })
+                    .attr("fill", "#69b3a2")
+
+
+
+            })
+
+        }
+        update('Cases')
+
+        ////////////////////////////////////// End of USA Daily New Cases Trend code //////////////////////////////
+
+        //------------------------1. PREPARATION------------------------//
+        //-----------------------------SVG------------------------------//
+        var width = 760;
+        var height = 300;
+        var margin = 30;
+        // we are appending SVG first
+        var svg = d3.select("#my_dataviz").append("svg")
+            .attr("preserveAspectRatio", "xMinYMin meet")
+            .attr("viewBox", "-"
+                + 50 + " -"
+                + 50 + " "
+                + (width + margin * 5) + " "
+                + (height + margin * 5))
+
+            .classed("svg-content", true);
+
+        var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+        //-----------------------------DATA-----------------------------//
+        const timeConv = d3.timeParse("%d-%b-%Y");
+        d3.csv("data/covid_confirmed_usafacts.csv", function(data) {
+            var slices = data.columns.slice(1).map(function(id) {
+                return {
+                    id: id,
+                    values: data.map(function(d){
+                        return {
+                            date: timeConv(d.date),
+                            measurement: +d[id]
+                        };
+                    })
+                };
+            });
+
+            console.log(slices)
 
 //----------------------------SCALES----------------------------//
-        const xScale = d3.scaleTime().range([0,width]);
-        const yScale = d3.scaleLinear().rangeRound([height, 0]);
-        xScale.domain(d3.extent(data, function(d){
-            return timeConv(d.date)}));
+            const xScale = d3.scaleTime().range([0,width]);
+            const yScale = d3.scaleLinear().rangeRound([height, 0]);
+            xScale.domain(d3.extent(data, function(d){
+                return timeConv(d.date)}));
 
-        yScale.domain([(0), d3.max(slices, function(c) {
-            return d3.max(c.values, function(d) {
-                return d.measurement + 4; });
-        })
-        ]);
+            yScale.domain([(0), d3.max(slices, function(c) {
+                return d3.max(c.values, function(d) {
+                    return d.measurement + 4; });
+            })
+            ]);
 
 //-----------------------------AXES-----------------------------//
-        const yaxis = d3.axisLeft()
-            .ticks((slices[0].values).length-170)
-            .scale(yScale);
+            const yaxis = d3.axisLeft()
+                .ticks((slices[0].values).length - 156)
+                .scale(yScale);
 
-        const xaxis = d3.axisBottom()
-            .ticks(d3.timeDay.every(60))
-            .tickFormat(d3.timeFormat('%b %d'))
-            .scale(xScale);
+            const xaxis = d3.axisBottom()
+                .ticks(d3.timeDay.every(60))
+                .tickFormat(d3.timeFormat('%b %d'))
+                .scale(xScale);
 
 //----------------------------LINES-----------------------------//
-        const line = d3.line()
-            .x(function(d) { return xScale(d.date); })
-            .y(function(d) { return yScale(d.measurement); });
+            const line = d3.line()
+                .x(function(d) { return xScale(d.date); })
+                .y(function(d) { return yScale(d.measurement); });
 
 //-------------------------2. DRAWING---------------------------//
 //-----------------------------AXES-----------------------------//
-        svg.append("g")
-            .attr("class", "axis")
-            .attr("transform", "translate(0," + height + ")")
-            .call(xaxis);
+            svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xaxis);
 
-        svg.append("g")
-            .attr("class", "axis")
-            .call(yaxis)
-            .append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("dy", ".75em")
-            .attr("y", 10)
-            .style("text-anchor", "end")
-            .text("Total Cases");
+            svg.append("g")
+                .attr("class", "axis")
+                .call(yaxis)
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("dy", ".75em")
+                .attr("y", 10)
+                .style("text-anchor", "end")
+                .text("Total Cases");
+
+//-----------------------------ANNOTATIONS-----------------------------//
+
+            svg.append("circle")
+                .attr("cx", 720)
+                .attr("cy", 100)
+                .attr("r", 60)
+                .style("stroke", "red")
+                .style("stroke-width",3)
+                .style("stroke-dasharray", ("3, 3"))
+                .style("fill","none");
+
+            //arrow
+            svg.append("svg:defs").append("svg:marker")
+                .attr("id", "triangle")
+                .attr("refX", 6)
+                .attr("refY", 6)
+                .attr("markerWidth", 30)
+                .attr("markerHeight", 30)
+                .attr("markerUnits","userSpaceOnUse")
+                .attr("orient", "auto")
+                .append("path")
+                .attr("d", "M 0 0 12 6 0 12 3 6")
+                .style("fill", "red");
+
+            //line
+            svg.append("line")
+                .attr("x1",  300)
+                .attr("y1", 30)
+                .attr("x2", 650)
+                .attr("y2", 100)
+
+                .attr("stroke-width", 1)
+                .attr("stroke", "red")
+                .attr("marker-end", "url(#triangle)");
+
+            svg.append("text")
+                .attr("x",200)
+                .attr("y",25)
+                .attr("font-family","sans-serif")
+                .attr("font-size",10)
+                .style("fill", "red")
+                .text("COVID-19 cases surge in TX,CA and FL since mid-June");
+
+
+//-----------------------------AXES-----------------------------//
 
 //----------------------------LINES-----------------------------//
-        const lines = svg.selectAll("lines")
-            .data(slices)
-            .enter()
-            .append("g");
+            const lines = svg.selectAll("lines")
+                .data(slices)
+                .enter()
+                .append("g");
 
-        lines.append("path")
-            .attr("class", "line")
-            .attr("d", function(d) { return line(d.values); })
-            .attr("stroke", function(d) { return color(d.id); });
+            lines.append("path")
+                .attr("class", "line")
+                .attr("d", function(d) { return line(d.values); })
+                .attr("stroke", function(d) { return color(d.id); });
 
-        lines.append("text")
-            .attr("class","serie_label")
-            .datum(function(d) {
-                return {
-                    id: d.id,
-                    value: d.values[d.values.length - 1]}; })
-            .attr("transform", function(d) {
-                return "translate(" + (xScale(d.value.date) + 10)
-                    + "," + (yScale(d.value.measurement) + 5 )+ ")"; })
-            .attr("x", 10)
-            .text(function(d) { return d.id; })
-            .style("fill", function(d) { return color(d.id); })
+            lines.append("text")
+                .attr("class","serie_label")
+                .datum(function(d) {
+                    return {
+                        id: d.id,
+                        value: d.values[d.values.length - 1]}; })
+                .attr("transform", function(d) {
+                    return "translate(" + (xScale(d.value.date) + 10)
+                        + "," + (yScale(d.value.measurement) + 5 )+ ")"; })
+                .attr("x", 10)
+                .text(function(d) { return d.id; })
+                .style("fill", function(d) { return color(d.id); })
 
-        const ghost_lines = lines.append("path")
-            .attr("class", "ghost-line")
-            .attr("d", function(d) { return line(d.values); })
-            .attr("stroke", function(d) { return color(d.id); });
+            const ghost_lines = lines.append("path")
+                .attr("class", "ghost-line")
+                .attr("d", function(d) { return line(d.values); })
+                .attr("stroke", function(d) { return color(d.id); });
 
 //---------------------------EVENTS-----------------------------//
-        lines.selectAll(".ghost-line")
-            .on('mouseover', function() {
-                const selection = d3.select(this).raise();
+            lines.selectAll(".ghost-line")
+                .on('mouseover', function() {
+                    const selection = d3.select(this).raise();
 
-                selection
-                    .transition()
-                    .delay("100").duration("10")
-                    //.style("stroke","#ed3700")
-                    .style("stroke", function(d) { return color(d.id); })
-                    .style("opacity","1")
-                    .style("stroke-width","3")
+                    selection
+                        .transition()
+                        .delay("100").duration("10")
+                        //.style("stroke","#ed3700")
+                        .style("stroke", function(d) { return color(d.id); })
+                        .style("opacity","1")
+                        .style("stroke-width","3")
 
-                // add the legend action
-                const legend = d3.select(this.parentNode)
-                    .select(".serie_label");
+                    // add the legend action
+                    const legend = d3.select(this.parentNode)
+                        .select(".serie_label");
 
-                legend
-                    .transition()
-                    .delay("100")
-                    .duration("10")
-                    //.style("fill","#2b2929");
-                    .style("fill", function(d) { return color(d.id); })
-            })
-
-
-
-            .on('mouseout', function() {
-                const selection = d3.select(this)
-
-                selection
-                    .transition()
-                    .delay("100")
-                    .duration("10")
-                    .style("stroke","#d2d2d2")
-                    .style("opacity","0")
-                    .style("stroke-width","3");
-
-                // add the legend action
-                const legend = d3.select(this.parentNode)
-                    .select(".serie_label");
-
-                legend
-                    .transition()
-                    .delay("100")
-                    .duration("10")
-                    //.style("fill","#d2d2d2");
-                    .style("fill", function(d) { return color(d.id); })
-            })
-
-    });
+                    legend
+                        .transition()
+                        .delay("100")
+                        .duration("10")
+                        //.style("fill","#2b2929");
+                        .style("fill", function(d) { return color(d.id); })
+                })
 
 
 
-    ////////////////////////////////Beginning of death trend by state code //////////////////////
+                .on('mouseout', function() {
+                    const selection = d3.select(this)
 
-    // set the dimensions and margins of the graph
-    var margin_line = {top: 30, right: 0, bottom: 30, left: 50},
-        width_line = 210 - margin_line.left - margin_line.right,
-        height_line = 210 - margin_line.top - margin_line.bottom;
+                    selection
+                        .transition()
+                        .delay("100")
+                        .duration("10")
+                        .style("stroke","#d2d2d2")
+                        .style("opacity","0")
+                        .style("stroke-width","3");
 
-    //Read the data
-    d3.csv("data/covid_deaths_usafacts.csv", function(data) {
+                    // add the legend action
+                    const legend = d3.select(this.parentNode)
+                        .select(".serie_label");
 
-// group the data: I want to draw one line per group
-        var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
-            .key(function(d) { return d.State;})
-            .entries(data);
+                    legend
+                        .transition()
+                        .delay("100")
+                        .duration("10")
+                        //.style("fill","#d2d2d2");
+                        .style("fill", function(d) { return color(d.id); })
+                })
 
-// What is the list of groups?
-        allKeys = sumstat.map(function(d){return d.key})
-
-// Add an svg element for each group. The will be one beside each other and will go on the next row when no more room available
-        var svg = d3.select("#my_dataviz5")
-            .selectAll("uniqueChart")
-            .data(sumstat)
-            .enter()
-            .append("svg")
-            .attr("width", width_line + margin_line.left + margin_line.right)
-            .attr("height", height_line + margin_line.top + margin_line.bottom)
-            .append("g")
-            .attr("transform",
-                "translate(" + margin_line.left + "," + margin_line.top + ")");
-
-// Add X axis --> it is a date format
-        var x = d3.scaleLinear()
-            .domain(d3.extent(data, function(d) { return d.Month; }))
-            .range([ 0, width_line ]);
-        svg
-            .append("g")
-            .attr("transform", "translate(0," + height_line + ")")
-            .call(d3.axisBottom(x).ticks(3));
-
-//Add Y axis
-        var y = d3.scaleLinear()
-            .domain([0, d3.max(data, function(d) { return +d.Death; })])
-            .range([ height_line, 0 ]);
-        svg.append("g")
-            .call(d3.axisLeft(y).ticks(5));
-
-// color palette
-        var color = d3.scaleOrdinal()
-            .domain(allKeys)
-            .range(['#4daf4a','#377eb8','#e41a1c','#984ea3'])
+        });
 
 
-//var color = d3.scaleOrdinal(d3.schemeCategory20);
-// Draw the line
-        svg
-            .append("path")
-            .attr("fill", "none")
-            .attr("stroke", function(d){ return color(d.key) })
-            .attr("stroke-width", 1.9)
-            .attr("d", function(d){
-                return d3.line()
-                    .x(function(d) { return x(d.Month); })
-                    .y(function(d) { return y(+d.Death); })
-                    (d.values)
-            })
-
-// Add titles
-        svg
-            .append("text")
-            .attr("text-anchor", "start")
-            .attr("y", -5)
-            .attr("x", 0)
-            .text(function(d){ return(d.key)})
-            .style("fill", function(d){ return color(d.key) })
-
-    })
-
-    ////////////////////////////////End of death trend by state code //////////////////////
-
-</script>
+    </script>
+</div>
 </body>
 </html>

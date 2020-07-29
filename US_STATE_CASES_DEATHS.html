@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>CSS Website Layout</title>
+    <title>US_STATE_CASES_DEATHS</title>
     <meta charset="utf-8">
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="js/d3_annotation.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         * {
@@ -49,45 +48,15 @@
             display: block;
             color: #f2f2f2;
             text-align: center;
-            padding: 14px 16px;
+            padding: 5px 12px;
             text-decoration: none;
+            font-size: medium;
         }
 
         /* Change color on hover */
         .topnav a:hover {
             background-color: #ddd;
             color: black;
-        }
-
-        /* Create three unequal columns that floats next to each other */
-        .column {
-            float: left;
-            padding: 10px;
-        }
-
-        /* Left and right column */
-        .column.side {
-            width: 25%;
-        }
-
-        /* Middle column */
-        .column.middle {
-            width: 100%;
-        }
-
-        /* Clear floats after the columns */
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-            gap: 0px;
-        }
-
-        /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-        @media screen and (max-width: 600px) {
-            .column.middle {
-                width: 100%;
-            }
         }
 
         .tooltip {
@@ -129,29 +98,22 @@
 <div class="header">
     <h1 style="text-align:center;color:floralwhite;font-family:courier;font-size:250%">COVID-19 USA DATA TRACKER</h1>
 </div>
-<br>
-
 <div class="body">
     <div class="container">
         <div class="topnav">
-            <a href="index.html">HOME</a>
-            <a href="US_STATE_CASES_DEATHS.html">U.S. STATE DATA</a>
-            <a href="Demographic.html">DEMOGRAPHIC DATA</a>
-            <a href="CASES_DEATHS_TREND.html">TREND DATA</a>
+            <a href="index.html"><b>MAP VIEW</b></a>
+            <a href="US_STATE_CASES_DEATHS.html"><b>STATE DATA</b></a>
+            <a href="Demographic.html"><b>DEMOGRAPHIC DATA</b></a>
+            <a href="CASES_DEATHS_TREND.html"><b>TREND DATA</b></a>
         </div>
     </div>
-
-    <div class="row">
-        <div class="column middle">
-            <p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 20px">COVID-19 Total Cases vs Deaths By State:</b><br>The following scatter plot represents the number of COVID-19 cases vs total deaths reported in  different U.S. states as of 07/15/2020. Hover over the circles to see the additional details. Annotation describes that the New York state reported highest number of total deaths and cases in the United States so far.<br></p>
-            <div id="my_dataviz3" style="background-color:#e6efee;color:rgba(177,183,241,0.09);padding:10px;border: 5px outset #101079"></div>
-            <p style="background-color:antiquewhite;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 20px">Deaths By State:</b><br> The following bar plots represent the descending order of total COVID-19 deaths reported in U.S. states as of 07/15/2020. New York and New Jersey are the only two states where the total cumulative death counts surpassed 10,000 mark.<br></p>
-            <div id="my_dataviz2" style="background-color:#d0f3f0;color:rgba(236,241,175,0.09);padding:10px;border: 5px outset #08080e"></div>
-            <br>
-        </div>
-    </div>
+    <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">COVID-19 Total Cases vs Deaths By State:</b><br>The following scatter plot represents the number of COVID-19 cases vs total deaths reported in  different U.S. states as of 07/15/2020. Hover over the circles to see the additional details. Annotation describes that the New York state reported highest number of total deaths and cases in the United States so far.<br></p>
+    <div id="my_dataviz3" style="background-color:#f8f0e1;color:rgba(177,183,241,0.09);padding:10px;border: 5px outset #101079"></div>
+    <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">Deaths By State:</b><br> The following bar plots represent the descending order of total COVID-19 deaths reported in U.S. states as of 07/15/2020. New York and New Jersey are the only two states where the total cumulative death counts surpassed 10,000 mark.<br></p>
+    <div id="my_dataviz2" style="background-color:#f8f0e1;color:rgba(236,241,175,0.09);padding:10px;border: 5px outset #08080e"></div>
+    <br>
     <footer>
-        <p style="background-color:#ffffff;font-family:Helvetica Neue;font-size:130%" align="justify">
+        <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify">
             <b>Reference:</b> For more information about COVID-19 disease please visit <a href="https://www.cdc.gov/coronavirus/2019-nCoV/index.html">https://www.cdc.gov/coronavirus/2019-nCoV/index.html</a>
             <br>
             <b>Data Courtesy:</b><a href="https://www.cdc.gov/"> https://www.cdc.gov/</a>
@@ -167,8 +129,8 @@
 
     // set the dimensions and margins of the graph
     var margin_scatter = {top: 10, right: 30, bottom: 30, left: 60},
-        width_scatter = 1175 - margin_scatter.left - margin_scatter.right,
-        height_scatter = 500 - margin_scatter.top - margin_scatter.bottom;
+        width_scatter = 1200 - margin_scatter.left - margin_scatter.right,
+        height_scatter = 400 - margin_scatter.top - margin_scatter.bottom;
     // append the svg object to the body of the page
     var svg_scatter = d3.select("#my_dataviz3")
         .append("svg")
@@ -193,6 +155,10 @@
         var color = d3.scaleLinear()
             .domain([minVal,midVal,maxVal])
             .range(['#4daf4a','#1a93e4','#e41a1c'])
+
+        var sizeScale = d3.scaleLinear()
+            .domain([minVal,maxVal])
+            .range([5,20]);
 
         // Add X axis
         var x = d3.scaleLinear()
@@ -255,40 +221,50 @@
                 .style("opacity", 0); // don't care about position!
         };
 
-        var annotationsRight = [
-            {
-                note: {
 
-                    title: "NY reported highest number of COVID-19 cases and deaths"
-                },
-                connector: {
-                    end: "arrow",        // Can be none, or arrow or dot
-                    type: "line",      // ?? don't know what it does
-                    lineType : "vertical",    // ?? don't know what it does
-                    endScale: 2    // dot size
-                },
-                color: ['blue'],
-                x: 983,
-                y: 55,
-                dy: 120,
-                dx: -100
-            }
-        ]
+        //arrow
+        svg_scatter.append("svg:defs").append("svg:marker")
+            .attr("id", "triangle")
+            .attr("refX", 6)
+            .attr("refY", 6)
+            .attr("markerWidth", 30)
+            .attr("markerHeight", 30)
+            .attr("markerUnits","userSpaceOnUse")
+            .attr("orient", "auto")
+            .append("path")
+            .attr("d", "M 0 0 12 6 0 12 3 6")
+            .style("fill", "red");
 
-// Add annotation to the chart
-        var makeAnnotationsRight = d3.annotation()
-            .annotations(annotationsRight)
+        //line
+        svg_scatter.append("line")
+            .attr("x1", 950)
+            .attr("y1", 160)
+            .attr("x2", 1000)
+            .attr("y2", 70)
+            .attr("stroke-width", 2)
+            .attr("stroke", "red")
+            .attr("marker-end", "url(#triangle)");
+
+        svg_scatter.append("text")
+            .attr("x",750)
+            .attr("y",185)
+            .attr("font-family","sans-serif")
+            .attr("font-size",15)
+            .style("fill", "red")
+            .style("text-decoration", "underline")
+            .text("NY state reported highest cases and deaths");
+
 
         // Add dots
         svg_scatter.append('g')
-            .call(makeAnnotationsRight)
+            //.call(makeAnnotationsRight)
             .selectAll("dot")
             .data(data)
             .enter()
             .append("circle")
-            .attr("cx", function (d) { return x(d.Death); } )
-            .attr("cy", function (d) { return y(d.Total_Cases); } )
-            .attr("r", 10)
+            .attr("cx", function (d) { return x(d.Death); })
+            .attr("cy", function (d) { return y(d.Total_Cases); })
+            .attr("r", function (d, i) { return sizeScale(d.Total_Cases); })
             .style("fill", function(d) { return color(d.Total_Cases); })
             .on("mouseover", tipMouseover)
             .on("mouseout", tipMouseout);
@@ -308,8 +284,6 @@
             .duration(2000)
             .attr("cx", function (d) { return x(d.Death); } )
             .attr("cy", function (d) { return y(d.Total_Cases); })
-
-
 
 
     })
@@ -345,85 +319,87 @@
         .attr("class", "myYaxis")
 
 
-        // Parse the Data
-        d3.csv("data/COVID_Deaths_State.csv", function (data) {
+    // Parse the Data
+    d3.csv("data/COVID_Deaths_State.csv", function (data) {
 
-            data.sort(function (a, b) {
-                return b.Total_Deaths - a.Total_Deaths;
+        data.sort(function (a, b) {
+            return b.Total_Deaths - a.Total_Deaths;
+        });
+
+        var color = d3.scaleOrdinal(d3.schemeCategory10)
+        //var colorScale = d3.category20c();
+        // X axis
+        x_b.domain(data.map(function (d) {
+            return d.State;
+        }))
+        xAxis_b.transition().duration(1000).call(d3.axisBottom(x_b)).selectAll("text")
+            .attr("transform", "translate(-10,0)rotate(-45)")
+            .style("text-anchor", "end");
+
+        // text label for the x axis
+        svg2.append("text")
+            .attr("transform",
+                "translate(" + (width1 / 2.3) + " ," +
+                (height1 + margin1.top + 20) + ")")
+            .style("text-anchor", "middle")
+            .text("US States");
+
+        // Add Y axis
+        y_b.domain([0, d3.max(data, function (d) {
+            return +d.Total_Deaths
+        })]);
+        yAxis_b.transition().duration(1000).call(d3.axisLeft(y_b));
+
+        svg2.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0 - margin1.left)
+            .attr("x", 0 - (height1 / 2))
+            .attr("dy", "1em")
+            .style("text-anchor", "middle")
+            .text("Total Deaths");
+        //color.domain(data.map(function (d){ return d.Group; }));
+
+        // variable u: map data to existing bars
+        var u2 = svg2.selectAll("rect")
+            .data(data)
+
+        // update bars
+        u2
+            .enter()
+            .append("rect")
+            .merge(u2)
+            .transition()
+            .duration(1000)
+            .attr("x", function (d) {
+                return x_b(d.State);
+            })
+            .attr("y", function (d) {
+                return y_b(d.Total_Deaths);
+            })
+            .attr("width", x_b.bandwidth())
+            .attr("height", function (d) {
+                return height1 - y_b(d.Total_Deaths);
+            })
+            //.attr("fill", function(d){return colorScale(d.Group); })
+            //.attr("fill", function (d){ return color(d.State); })
+            .attr("class", function (d) {
+                var s = "bar ";
+                if (d.Total_Deaths < 5000) {
+                    return s + "bar1";
+                } else if (d.Total_Deaths < 10000) {
+                    return s + "bar2";
+                } else {
+                    return s + "bar3";
+                }
             });
-
-            var color = d3.scaleOrdinal(d3.schemeCategory10)
-            //var colorScale = d3.category20c();
-            // X axis
-            x_b.domain(data.map(function (d) {
-                return d.State;
-            }))
-            xAxis_b.transition().duration(1000).call(d3.axisBottom(x_b)).selectAll("text")
-                .attr("transform", "translate(-10,0)rotate(-45)")
-                .style("text-anchor", "end");
-
-            // text label for the x axis
-            svg2.append("text")
-                .attr("transform",
-                    "translate(" + (width1 / 2.3) + " ," +
-                    (height1 + margin1.top + 20) + ")")
-                .style("text-anchor", "middle")
-                .text("US States");
-
-            // Add Y axis
-            y_b.domain([0, d3.max(data, function (d) {
-                return +d.Total_Deaths
-            })]);
-            yAxis_b.transition().duration(1000).call(d3.axisLeft(y_b));
-
-            svg2.append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("y", 0 - margin1.left)
-                .attr("x", 0 - (height1 / 2))
-                .attr("dy", "1em")
-                .style("text-anchor", "middle")
-                .text("Total Deaths");
-            //color.domain(data.map(function (d){ return d.Group; }));
-
-            // variable u: map data to existing bars
-            var u2 = svg2.selectAll("rect")
-                .data(data)
-
-            // update bars
-            u2
-                .enter()
-                .append("rect")
-                .merge(u2)
-                .transition()
-                .duration(1000)
-                .attr("x", function (d) {
-                    return x_b(d.State);
-                })
-                .attr("y", function (d) {
-                    return y_b(d.Total_Deaths);
-                })
-                .attr("width", x_b.bandwidth())
-                .attr("height", function (d) {
-                    return height1 - y_b(d.Total_Deaths);
-                })
-                //.attr("fill", function(d){return colorScale(d.Group); })
-                //.attr("fill", function (d){ return color(d.State); })
-                .attr("class", function (d) {
-                    var s = "bar ";
-                    if (d.Total_Deaths < 5000) {
-                        return s + "bar1";
-                    } else if (d.Total_Deaths < 10000) {
-                        return s + "bar2";
-                    } else {
-                        return s + "bar3";
-                    }
-                });
 // Initialize plot
 
-        })
+    })
 
     ///////////////////////////////////End of Deaths by state bar plot code //////////////////////
 
- </script>
+    ///////////////////////////////////End of Deaths by state bar plot code //////////////////////
+
+</script>
 </body>
 </html>
