@@ -6,10 +6,6 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
         body {
             margin: 0;
             font: 11px sans-serif;
@@ -94,14 +90,14 @@
     </div>
 
     <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">Number of Deaths by Age and Gender:</b><br> The following interactive chart shows the cumulative COVID-19 deaths by sex and age group for the United States of 07/15/2020. Click the buttons to switch between two sets of data representation.<br>It illustrates a correlation that the COVID-19 transmitted disease is more fatal to older adults especially between age group "75-84 years" for Male and age group "85 years and above" for Female.<br></p>
-    <div id="my_dataviz1" style="background-color:#f8f0e1;color:#eaba98;padding:10px;border: 5px outset #08080e">
+    <div id="my_dataviz" style="background-color:#f8f0e1;color:#eaba98;padding:10px;border: 5px outset #08080e">
         <div><button type="button" onclick="update('Male')">Male</button>
             <button type="button" onclick="update('Female')">Female</button></div>
     </div>
             <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">Number of Deaths by Race :</b><br> The following bubble chart shows the distribution of COVID-19 deaths by race and Hispanic origin as of 07/15/2020 which creates an avenue to perform further analysis about the differential impact of COVID-19 deaths on these populations.<br>Hover over the bubbles to see addition details about those demographics as such a) death distribution percentage,b) population distribution percentage. It has been observed that there is a correlation between death and population percentage. <br>For instance, COVID-19 fatality reported more in White American population as compared to other minorities. It might be due to the fact that White American are the majority as they represent 60.4% of the U.S. population followed by Hispanic/Latino and Black/African American .However, there are more COVID-19 deaths observed in Black/African American community than that of Hispanic/Latino community though the latter has higher population density as compared to the former.<br></p>
-            <div id="my_dataviz6" style="background-color:#f8f0e1;color:#cfffff;padding:10px;border: 5px outset #080817"></div>
+            <div id="my_dataviz1" style="background-color:#f8f0e1;color:#cfffff;padding:10px;border: 5px outset #080817"></div>
             <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">Number of Deaths per 100k Population by Race :</b><br>In order to continue further analysis about the COVID-19 deaths impact on these population, the following bubble chart has been crafted to show the mortality rate distribution of COVID-19 deaths reported in different communities.Hover over the bubbles to see addition details about those demographics which are not covered in the bubble chart mentioned above.<br>Based on the mortality rate distribution, the highest death percentage distribution observed in the Black/African American community. Here is a brief demographic analysis summary derived from the two bubble charts:<br> 1) White American community reported highest COVID-19 deaths by count,<br> 2) Black/African community reported highest COVID-19 mortality rate per 100k population, <br> 3) although American Indian/Alaska Native reported lowest COVID-19 deaths by count but in general the COVID-19 mortality rate is higher compared to that of White American, Asian and Other communities.<br></p>
-            <div id="my_dataviz7" style="background-color:#f8f0e1;color:#cfffff;padding:10px;border: 5px outset #080817"></div>
+            <div id="my_dataviz2" style="background-color:#f8f0e1;color:#cfffff;padding:10px;border: 5px outset #080817"></div>
 
     <br>
     <footer>
@@ -126,15 +122,14 @@
         height = 400 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
-    var svg1 = d3.select("#my_dataviz1")
+    var svg1 = d3.select("#my_dataviz")
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
-
-    //var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+    
     // Initialize the X axis
     var x1 = d3.scaleBand()
         .range([ 0, width ])
@@ -148,23 +143,12 @@
     var yAxis1 = svg1.append("g")
         .attr("class", "myYaxis")
 
-    svg1.append("text")
-        .attr("x", (width / 2))
-        .attr("y", 500)
-        .attr("text-anchor", "middle")
-        .style("font-size", "20px")
-        .style("text-decoration", "underline")
-        .text("COVID-19 Death By Gender and Age");
-
-    // A function that create / update the plot for a given variable:
+    // A function that update the chart based on selection 
     function update(selectedVar) {
 
-        // Parse the Data
+        // Load data
         d3.csv("data/COVID_AGE_GENDER.csv", function(data) {
 
-            //var color = d3.scaleLinear().domain(data)
-            //.range(["green","blue","red"])
-            //var colorScale = d3.category20c();
             // X axis
             x1.domain(data.map(function(d) { return d.Group; }))
             xAxis1.transition().duration(1000).call(d3.axisBottom(x1)).selectAll("text")
@@ -182,7 +166,9 @@
             // Add Y axis
             y1.domain([0, d3.max(data, function(d) { return +d[selectedVar] }) ]);
             yAxis1.transition().duration(1000).call(d3.axisLeft(y1));
-
+            
+            
+            // text label for the x axis
             svg1.append("text")
                 .attr("transform", "rotate(-90)")
                 .attr("y", 0 - margin.left)
@@ -190,13 +176,13 @@
                 .attr("dy", "1em")
                 .style("text-anchor", "middle")
                 .text("Total Deaths");
-            //color.domain(data.map(function (d){ return d.Group; }));
+   
 
             // variable u: map data to existing bars
             var u = svg1.selectAll("rect")
                 .data(data)
 
-            // update bars
+            // update bars based on Deaths count
             u
                 .enter()
                 .append("rect")
@@ -213,38 +199,41 @@
 
         })}
 
+    // Initialize the chart with this selection
     update('Male')
 
-    ////////////////////////////////End of Demographic analysis#1 code //////////////////////
+    ////////////////////////////////End of Demographic analysis#1 code ////////////////////////////////////////////////////////////////
 
     ////////////////////////////////Beginning of Demographic analysis#2 code //////////////////////
 
     // Data is hard coded based on the information gathered from the CDC website.Link: https://data.cdc.gov/NCHS/Provisional-Death-Counts-for-Coronavirus-Disease-C/pj7m-y5uh/data
+    
     dataset = {
-        "children": [{"Name":"White","Count":64073,"Death_Percentage_Distribution":52.8,"Population_Distribution":60.4},
-            {"Name":"Black/African American","Count":27848,"Death_Percentage_Distribution":22.9,"Population_Distribution":12.5},
-            {"Name":"American Indian/Alaska Native","Count":974,"Death_Percentage_Distribution":0.8,"Population_Distribution":0.7},
-            {"Name":"Asian","Count":6022,"Death_Percentage_Distribution":5,"Population_Distribution":5.7},
-            {"Name":"Hispanic/Latino","Count":20849,"Death_Percentage_Distribution":17.2,"Population_Distribution":18.3},
-            {"Name":"Other","Count":1608,"Death_Percentage_Distribution":1.3,"Population_Distribution":2.4}]
+        "children": [{"RACE":"White","Deaths":64073,"Death_Percentage_Distribution":52.8,"Population_Distribution":60.4},
+            {"RACE":"Black/African American","Deaths":27848,"Death_Percentage_Distribution":22.9,"Population_Distribution":12.5},
+            {"RACE":"American Indian/Alaska Native","Deaths":974,"Death_Percentage_Distribution":0.8,"Population_Distribution":0.7},
+            {"RACE":"Asian","Deaths":6022,"Death_Percentage_Distribution":5,"Population_Distribution":5.7},
+            {"RACE":"Hispanic/Latino","Deaths":20849,"Death_Percentage_Distribution":17.2,"Population_Distribution":18.3},
+            {"RACE":"Other","Deaths":1608,"Death_Percentage_Distribution":1.3,"Population_Distribution":2.4}]
     };
-
+ 
+    // Bubble diameter set 
     var diameter = 600;
     var color = d3.scaleOrdinal(d3.schemeCategory20);
-
-
+    
+    // pack the dataset and define size , padding
     var bubble = d3.pack(dataset)
         .size([diameter, diameter])
         .padding(2);
-    console.log(bubble)
 
-    var svg_bubble = d3.select("#my_dataviz6")
+    // Assign bubbles to the svg chart
+    var svg_bubble = d3.select("#my_dataviz1")
         .append("svg")
         .attr("width", diameter)
         .attr("height", diameter)
         .attr("class", "bubble");
 
-    //arrow
+    //arrow for the annotation
     svg_bubble.append("svg:defs").append("svg:marker")
         .attr("id", "triangle")
         .attr("refX", 6)
@@ -257,7 +246,7 @@
         .attr("d", "M 0 0 12 6 0 12 3 6")
         .style("fill", "green");
 
-    //line
+    //line for the annotation
     svg_bubble.append("line")
         .attr("x1", 200)
         .attr("y1", 490)
@@ -267,7 +256,8 @@
         .attr("stroke-width", 1)
         .attr("stroke", "green")
         .attr("marker-end", "url(#triangle)");
-
+    
+    // text for the annotation
     svg_bubble.append("text")
         .attr("x",5)
         .attr("y",500)
@@ -276,7 +266,7 @@
         .style("fill", "green")
         .style("text-decoration", "underline")
         .text("Least deaths reported in");
-
+    // text for the annotation 
     svg_bubble.append("text")
         .attr("x",5)
         .attr("y",515)
@@ -286,13 +276,13 @@
         .style("text-decoration", "underline")
         .text("American Indian/Alaska Native race");
 
-    var tooltip_bubble = d3.select("#my_dataviz6").append("div")
+    var tooltip_bubble = d3.select("#my_dataviz1").append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
 
+    // Declare nodes to sort the data 
     var nodes = d3.hierarchy(dataset)
         .sum(function(d) { return d.Count; });
-    console.log(nodes)
 
     var node = svg_bubble.selectAll(".node")
         .data(bubble(nodes).descendants())
@@ -301,14 +291,13 @@
             return  !d.children
         })
         .append("g")
-        //.call(makeAnnotationsRight_bubble)
         .attr("class", "node")
         .attr("transform", function(d) {
             console.log(d.x);
             return "translate(" + d.x + "," + d.y + ")";
         });
 
-
+    // Append circle based on the radius
     node.append("circle")
         .attr("r", function(d) {
             return d.r;
@@ -328,7 +317,6 @@
                 .transition()
                 .duration(200) // ms
                 .style("opacity", .9) // started as 0!
-
         })
 
         .on("mouseout", function(d) {
@@ -336,12 +324,13 @@
                 .duration(300) // ms
                 .style("opacity", 0); // don't care about position!
         })
-
+    
+    // Set the variable "RACE" value in the corresponding bubble
     node.append("text")
         .attr("dy", ".2em")
         .style("text-anchor", "middle")
         .text(function(d) {
-            return d.data.Name.substring(0, d.r / 3);
+            return d.data.RACE.substring(0, d.r / 3);
         })
         .attr("font-family", "sans-serif")
         .attr("font-size", function(d){
@@ -349,8 +338,9 @@
         })
         .attr("fill", "white")
         .on("mouseover", function(d) {
-            var html  = "<span><b> Race : </b>" + d.data.Name+ "</span><br/>" +
-                "<b style='color: darkred'> Total Deaths: <b/>" + d.data.Count+"<br/>"+
+            // Add HTML elements for the tooltip
+            var html  = "<span><b> Race : </b>" + d.data.RACE+ "</span><br/>" +
+                "<b style='color: darkred'> Total Deaths: <b/>" + d.data.Deaths+"<br/>"+
                 "<b style='color: red'> Death Distribution Percentage: <b/>" + d.data.Death_Percentage_Distribution+"<br/>"+
                 "<b style='color: darkblue'> Population Distribution Percentage: <b/>" + d.data.Population_Distribution;
 
@@ -374,7 +364,7 @@
         .attr("dy", "1.3em")
         .style("text-anchor", "middle")
         .text(function(d) {
-            return d.data.Count;
+            return d.data.Deaths;
         })
 
         .attr("font-size", function(d){
@@ -382,8 +372,8 @@
         })
         .attr("fill", "white")
         .on("mouseover", function(d) {
-            var html  = "<span><b> Race : </b>" + d.data.Name+ "</span><br/>" +
-                "<b style='color: darkred'> Total Deaths: <b/>" + d.data.Count+"<br/>"+
+            var html  = "<span><b> Race : </b>" + d.data.RACE+ "</span><br/>" +
+                "<b style='color: darkred'> Total Deaths: <b/>" + d.data.Deaths+"<br/>"+
                 "<b style='color: red'> Death Distribution Percentage: <b/>" + d.data.Death_Percentage_Distribution+"<br/>"+
                 "<b style='color: darkblue'> Population Distribution Percentage: <b/>" + d.data.Population_Distribution;
 
