@@ -295,12 +295,13 @@
             .transition()
             .delay(function(d,i){return(i*3)})
             .duration(2000)
-            .text(function (d) { return d.State; })
+            .text(function (d) { return d.abbr; })
             .attr("x", function (d) { return x(d.Deaths); })
             .attr("y", function (d) { return y(d.Total_Cases); })
             .attr("font_family", "sans-serif")  // Font type
-            .attr("font-size", "13px")  // Font size
-            .style("fill", "darkblue");
+            .attr("font-size", "8px")
+            .attr("text-anchor","middle")// Font size
+            .style("fill", "white");
 
 
 
