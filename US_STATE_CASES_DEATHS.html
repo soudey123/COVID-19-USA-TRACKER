@@ -126,7 +126,7 @@
 </div>
 
 <script type="text/javascript">
-     ////////////////////////////////////// Beginning of scatter plot code ////////////////////////////////////
+        ////////////////////////////////////// Beginning of scatter plot code ////////////////////////////////////
 
     // set the dimensions and margins of the graph
     var margin_scatter = {top: 10, right: 30, bottom: 30, left: 60},
@@ -143,7 +143,7 @@
     //var color = d3.scaleOrdinal(d3.schemeCategory10);
 
     //Read the data
-    d3.csv("data/US_MAP_DATA.csv", function(data) {
+    d3.csv("data/US_CASES_DEATHS.csv", function(data) {
 
         var dataArray = [];
         for (var d = 0; d < data.length; d++) {
@@ -203,8 +203,8 @@
         // tooltip mouseover event handler
         var tipMouseover = function(d) {
             //var color = color(d.jurisdiction);
-            var html  = "<span>" + d.jurisdiction + "</span><br/>" +
-                "<b style='color: red'>" + d.Death + "</b> Death, <b style='color: darkred'>" + d.Total_Cases + "</b> Total Cases";
+            var html  = "<span>" + d.State + "</span><br/>" +
+                "<b style='color: red'>" + d.Deaths + "</b> Deaths, <b style='color: darkred'>" + d.Total_Cases + "</b> Total Cases";
 
             tooltip.html(html)
                 .style("left", (d3.event.pageX + 15) + "px")
@@ -263,12 +263,13 @@
             .data(data)
             .enter()
             .append("circle")
-            .attr("cx", function (d) { return x(d.Death); })
+            .attr("cx", function (d) { return x(d.Deaths); })
             .attr("cy", function (d) { return y(d.Total_Cases); })
             .attr("r", function (d, i) { return sizeScale(d.Total_Cases); })
             .style("fill", function(d) { return color(d.Total_Cases); })
             .on("mouseover", tipMouseover)
             .on("mouseout", tipMouseout);
+
 
         // new X axis
         x.domain([0, 35000])
@@ -283,8 +284,24 @@
             .transition()
             .delay(function(d,i){return(i*3)})
             .duration(2000)
-            .attr("cx", function (d) { return x(d.Death); } )
+            .attr("cx", function (d) { return x(d.Deaths); } )
             .attr("cy", function (d) { return y(d.Total_Cases); })
+
+        svg_scatter.append("g")
+            .selectAll("text")
+            .data(data)
+            .enter()
+            .append("text")
+            .transition()
+            .delay(function(d,i){return(i*3)})
+            .duration(2000)
+            .text(function (d) { return d.State; })
+            .attr("x", function (d) { return x(d.Deaths); })
+            .attr("y", function (d) { return y(d.Total_Cases); })
+            .attr("font_family", "sans-serif")  // Font type
+            .attr("font-size", "13px")  // Font size
+            .style("fill", "darkblue");
+
 
 
     })
@@ -321,10 +338,10 @@
 
 
     // Parse the Data
-    d3.csv("data/COVID_Deaths_State.csv", function (data) {
+    d3.csv("data/US_CASES_DEATHS.csv", function (data) {
 
         data.sort(function (a, b) {
-            return b.Total_Deaths - a.Total_Deaths;
+            return b.Deaths - a.Deaths;
         });
 
         var color = d3.scaleOrdinal(d3.schemeCategory10)
@@ -347,7 +364,7 @@
 
         // Add Y axis
         y_b.domain([0, d3.max(data, function (d) {
-            return +d.Total_Deaths
+            return +d.Deaths
         })]);
         yAxis_b.transition().duration(1000).call(d3.axisLeft(y_b));
 
@@ -375,26 +392,33 @@
                 return x_b(d.State);
             })
             .attr("y", function (d) {
-                return y_b(d.Total_Deaths);
+                return y_b(d.Deaths);
             })
             .attr("width", x_b.bandwidth())
             .attr("height", function (d) {
-                return height1 - y_b(d.Total_Deaths);
+                return height1 - y_b(d.Deaths);
             })
             //.attr("fill", function(d){return colorScale(d.Group); })
             //.attr("fill", function (d){ return color(d.State); })
             .attr("class", function (d) {
                 var s = "bar ";
-                if (d.Total_Deaths < 5000) {
+                if (d.Deaths < 5000) {
                     return s + "bar1";
-                } else if (d.Total_Deaths < 10000) {
+                } else if (d.Deaths < 10000) {
                     return s + "bar2";
                 } else {
                     return s + "bar3";
                 }
             });
-// Initialize plot
 
+        // legend
+
+        svg2.append("circle").attr("cx",900).attr("cy",60).attr("r", 6).style("fill", "#e3486c")
+        svg2.append("circle").attr("cx",900).attr("cy",90).attr("r", 6).style("fill", "#0a81a8")
+        svg2.append("circle").attr("cx",900).attr("cy",120).attr("r", 6).style("fill", "#6fec76")
+        svg2.append("text").attr("x", 920).attr("y", 60).text("High Deaths Region").style("font-size", "15px").attr("alignment-baseline","middle")
+        svg2.append("text").attr("x", 920).attr("y", 90).text("Mid Deaths Region").style("font-size", "15px").attr("alignment-baseline","middle")
+        svg2.append("text").attr("x", 920).attr("y", 120).text("Low Deaths Region").style("font-size", "15px").attr("alignment-baseline","middle")
     })
 
     ///////////////////////////////////End of Deaths by state bar plot code //////////////////////
