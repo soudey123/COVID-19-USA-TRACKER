@@ -6,13 +6,13 @@ COVID-19 USA Tracker is a form of narrative visualization webpage useful in the 
 3)	Demographic impact of COVID-19 on different age-groups, sex, race/ethnicity, and
 4)	Overall daily COVID-19 cases trend data along with the number of cumulative cases reported by U.S. states.
 
-# DASHBOARD LINK
+## DASHBOARD LINK
 https://soudey123.github.io/COVID_19_USA_TRACKER/index.html
 
-# DATA COURTSEY
+## DATA COURTSEY
 https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/
 
 https://www.cdc.gov/coronavirus/2019-ncov/cases-updates/cases-in-us.html
 
-# U.S. MAP JSON FILE COURTSEY
+## U.S. MAP JSON FILE COURTSEY
 https://eric.clst.org/tech/usgeojson/
