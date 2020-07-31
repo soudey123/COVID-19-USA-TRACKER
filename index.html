@@ -224,6 +224,17 @@
                         .duration(500)
                         .style("opacity", 0);
                 });
+            
+            // Text annotation for hover instruction
+            
+             svg.append("text")
+                .attr("x",775)
+                .attr("y",350)
+                .attr("font-family","sans-serif")
+                .attr("font-size",15)
+                .style("fill", "red")
+                .style("text-decoration", "underline")
+                .text("Hover over state maps for details")
 
 
             // add a legend
@@ -386,7 +397,16 @@
                         .duration(500)
                         .style("opacity", 0);
                 });
-
+            
+            // Text annotation for hover instruction
+      svg_county.append("text")
+                .attr("x",765)
+                .attr("y",350)
+                .attr("font-family","sans-serif")
+                .attr("font-size",15)
+                .style("fill", "red")
+                .style("text-decoration", "underline")
+                .text("Hover over county maps for details")
 
             // add a legend
             var l_w = 140, l_h = 500;
