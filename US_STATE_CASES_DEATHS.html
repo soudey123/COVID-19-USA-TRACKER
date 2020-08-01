@@ -286,19 +286,20 @@
 
         //line for annotation
         svg_scatter.append("line")
-            .attr("x1", 970)
+            .attr("x1", 1050)
             .attr("y1", 110)
-            .attr("x2", 1000)
-            .attr("y2", 70)
+            .attr("x2", 1030)
+            .attr("y2", 75)
             .attr("stroke-width", 2)
             .attr("stroke", "red")
             .attr("marker-end", "url(#triangle)");
-
+        
+        // text for annotation
         svg_scatter.append("text")
-            .attr("x",750)
+            .attr("x",900)
             .attr("y",125)
             .attr("font-family","sans-serif")
-            .attr("font-size",15)
+            .attr("font-size",12)
             .style("fill", "red")
             .style("text-decoration", "underline")
             .text("NY state reported highest cases and deaths");
