@@ -318,29 +318,28 @@
             })
 
         }
-        update('Cases') // Initiliaze the bars 
+        update('Cases') // Initiliaze the bars
 
         ////////////////////////////////////// End of USA Daily New Cases Trend code //////////////////////////////
 
-       ////////////////////////////////////// Beginning of Total no. of Cases Trend by State code //////////////////////////////
-       
+        ////////////////////////////////////// Beginning of Total no. of Cases Trend by State code //////////////////////////////
+
         // Set width, height and margin
         var width = 760;
         var height = 300;
         var margin = 30;
         // appending SVG first
-        var svg = d3.select("#my_dataviz").append("svg")
-            .attr("preserveAspectRatio", "xMinYMin meet")
+        var svg = d3.select("#my_dataviz1").append("svg")
             .attr("viewBox", "-"
                 + 60 + " -"
                 + 60 + " "
                 + (width + margin * 5) + " "
                 + (height + margin * 5));
-        
-        //set color 
+
+        //set color
         var color = d3.scaleOrdinal(d3.schemeCategory20);
 
-        // time conversion using parse function 
+        // time conversion using parse function
         var timeConv = d3.timeParse("%d-%b-%Y");
         // load the USA state data of total no. of cases by date
         d3.csv("data/covid_confirmed_usafacts.csv", function(data) {
@@ -356,7 +355,7 @@
                 };
             });
 
-          // scaletime 
+            // scaletime
             var xScale = d3.scaleTime().range([0,width]);
             var yScale = d3.scaleLinear().rangeRound([height, 0]);
             xScale.domain(d3.extent(data, function(d){
@@ -367,7 +366,7 @@
                     return d.measurement + 4; });
             })
             ]);
-            
+
             // Y axis
             var yaxis = d3.axisLeft()
                 .ticks((slices[0].values).length - 156)
@@ -378,7 +377,7 @@
                 .tickFormat(d3.timeFormat('%b %d'))
                 .scale(xScale);
 
-     
+
             var line = d3.line()
                 .x(function(d) { return xScale(d.date); })
                 .y(function(d) { return yScale(d.measurement); });
@@ -409,7 +408,7 @@
                 .text("Date");
 
 
-           // draw circle for annotation
+            // draw circle for annotation
             svg.append("circle")
                 .attr("cx", 720)
                 .attr("cy", 100)
@@ -442,18 +441,18 @@
                 .attr("stroke-width", 1)
                 .attr("stroke", "red")
                 .attr("marker-end", "url(#triangle)");
-            
+
             // text for annotation
             svg.append("text")
                 .attr("x",200)
                 .attr("y",25)
                 .attr("font-family","sans-serif")
-                .attr("font-size",8)
+                .attr("font-size",9)
                 .style("fill", "red")
                 .style("text-decoration", "underline")
                 .text("COVID-19 cases surge in TX,CA and FL since mid-June");
 
-           var lines = svg.selectAll("lines")
+            var lines = svg.selectAll("lines")
                 .data(slices)
                 .enter()
                 .append("g");
@@ -462,7 +461,7 @@
                 .attr("class", "line")
                 .attr("d", function(d) { return line(d.values); })
                 .attr("stroke", function(d) { return color(d.id); });
-            
+
             // label each line with state name
             lines.append("text")
                 .attr("class","serie_label")
