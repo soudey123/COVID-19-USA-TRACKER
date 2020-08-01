@@ -331,8 +331,8 @@
         var svg = d3.select("#my_dataviz").append("svg")
             .attr("preserveAspectRatio", "xMinYMin meet")
             .attr("viewBox", "-"
-                + 50 + " -"
-                + 50 + " "
+                + 60 + " -"
+                + 60 + " "
                 + (width + margin * 5) + " "
                 + (height + margin * 5));
 
@@ -386,6 +386,7 @@
                 .attr("transform", "translate(0," + height + ")")
                 .call(xaxis);
 
+            // text label for Y axis
             svg.append("g")
                 .attr("class", "axis")
                 .call(yaxis)
@@ -393,10 +394,18 @@
                 .attr("transform", "rotate(-90)")
                 .attr("dy", ".75em")
                 //.attr("y", 10)
-                .attr("y", 0 - margin.left)
+                .attr("y", -55)
                 .attr("x",0 - (height / 2))
                 .style("text-anchor", "middle")
                 .text("Total Cases");
+
+            // text label for the x axis
+            svg.append("text")
+                .attr("transform",
+                    "translate(" + (width/2) + " ," +
+                    (height + margin + 20) + ")")
+                .style("text-anchor", "middle")
+                .text("Date");
 
 
            // draw circle for annotation
