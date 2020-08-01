@@ -140,7 +140,7 @@
 
     <div class="row">
         <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">Daily New Cases and Deaths Trend in USA:</b><br> The following chart shows the number of new COVID-19 cases reported each day in the U.S. since mid-March when the outbreak was officially declared in the United States. Click buttons to switch between the trend of daily new case counts, daily new death counts and  7-day average data.The 7-Day moving average of new cases (current day + 6 preceding days / 7) was calculated to smooth expected variations in daily counts. Additionally, hover over the bars to see the number of new cases by day and check the annotation to explore the recent exponential surge started from mid-June due to aggressive reopening strategy carried out by a few U.S. jurisdictions.<br></p>
-        <div id="my_dataviz4" style="background-color:#f8f0e1;color:#202c42;padding:10px;border: 5px outset #08080e">
+        <div id="my_dataviz" style="background-color:#f8f0e1;color:#202c42;padding:10px;border: 5px outset #08080e">
             <div><button onclick="update('Cases')">Cases</button>
                 <button onclick="update('Average_7Day_Cases')">Average_7Day</button>
                 <button onclick="update('Deaths')">Deaths</button>
@@ -148,7 +148,7 @@
         </div>
 
         <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">COVID-19 Cases Trend By State:</b><br>The following line chart exhibits the COVID-19 cases trend reported in different U.S. states as of 07/15/2020. <br>Going by the trend line, it is observed that the COVID-19 cases reached peak stage in New York, New Jersey and Illinois. Moreover based on the following chart , there is a steep surge observed in Texas , California and Florida state. Arizona and Georgia states also reported recent surge in COVID-19 cases. Hover over the lines to get an interactive clear view.<br></p>
-        <div id="my_dataviz" style="background-color:#f8f0e1;color:rgba(53,69,229,0.09);padding:10px;border: 5px outset #021d28"></div>
+        <div id="my_dataviz1" style="background-color:#f8f0e1;color:rgba(53,69,229,0.09);padding:10px;border: 5px outset #021d28"></div>
 
         <br>
         <footer>
@@ -174,12 +174,11 @@
 
 
         // append the svg object to the body of the page
-        var svg_daily = d3.select("#my_dataviz4")
+        var svg_daily = d3.select("#my_dataviz")
             .append("svg")
             .attr("width", width_daily + margin_daily.left + margin_daily.right)
             .attr("height", height_daily + margin_daily.top + margin_daily.bottom)
             .append("g")
-            //.call(makeAnnotationsRight_daily)
             .attr("transform",
                 "translate(" + margin_daily.left + "," + margin_daily.top + ")");
 
@@ -196,7 +195,7 @@
             .attr("d", "M 0 0 12 6 0 12 3 6")
             .style("fill", "red");
 
-        // circle
+        // circle for annotation
 
         svg_daily.append("circle")
             .attr("cx", 990)
@@ -208,7 +207,7 @@
             .style("fill","none");
 
 
-        //line
+        //line for annotation
         svg_daily.append("line")
             .attr("x1", 700)
             .attr("y1", 75)
@@ -252,7 +251,7 @@
         var yAxis = svg_daily.append("g")
             .attr("class", "myYaxis")
 
-        var tooltip = d3.select("#my_dataviz4").append("div")
+        var tooltip = d3.select("#my_dataviz").append("div")
             .attr("class", "tooltip")
             .style("opacity", 0);
 
@@ -319,15 +318,17 @@
             })
 
         }
-        update('Cases')
+        update('Cases') // Initiliaze the bars 
 
         ////////////////////////////////////// End of USA Daily New Cases Trend code //////////////////////////////
 
        ////////////////////////////////////// Beginning of Total no. of Cases Trend by State code //////////////////////////////
+       
+        // Set width, height and margin
         var width = 760;
         var height = 300;
         var margin = 30;
-        // we are appending SVG first
+        // appending SVG first
         var svg = d3.select("#my_dataviz").append("svg")
             .attr("preserveAspectRatio", "xMinYMin meet")
             .attr("viewBox", "-"
@@ -335,7 +336,8 @@
                 + 60 + " "
                 + (width + margin * 5) + " "
                 + (height + margin * 5));
-
+        
+        //set color 
         var color = d3.scaleOrdinal(d3.schemeCategory20);
 
         // time conversion using parse function 
@@ -393,7 +395,6 @@
                 .append("text")
                 .attr("transform", "rotate(-90)")
                 .attr("dy", ".75em")
-                //.attr("y", 10)
                 .attr("y", -55)
                 .attr("x",0 - (height / 2))
                 .style("text-anchor", "middle")
@@ -441,16 +442,16 @@
                 .attr("stroke-width", 1)
                 .attr("stroke", "red")
                 .attr("marker-end", "url(#triangle)");
-
+            
+            // text for annotation
             svg.append("text")
                 .attr("x",200)
                 .attr("y",25)
                 .attr("font-family","sans-serif")
-                .attr("font-size",10)
+                .attr("font-size",8)
                 .style("fill", "red")
                 .style("text-decoration", "underline")
                 .text("COVID-19 cases surge in TX,CA and FL since mid-June");
-
 
            var lines = svg.selectAll("lines")
                 .data(slices)
