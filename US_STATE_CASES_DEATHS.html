@@ -4,8 +4,11 @@
     <title>US_STATE_CASES_DEATHS</title>
     <meta charset="utf-8">
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        * {
+            box-sizing: border-box;
+        }
 
         body {
             margin: 0;
@@ -82,7 +85,7 @@
             margin: 1px;
             width: 100%;
         }
-
+        /* Different bar color legend for region */
         .bar1 { fill: #6fec76; }
         .bar2 { fill: #0a81a8; }
         .bar3 { fill: #e3486c; }
@@ -95,7 +98,6 @@
 <div class="header">
     <h1 style="text-align:center;color:floralwhite;font-family:courier;font-size:250%">COVID-19 USA DATA TRACKER</h1>
 </div>
-
 <div class="body">
     <div class="container">
         <div class="topnav">
@@ -107,9 +109,9 @@
     </div>
 
     <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">COVID-19 Total Cases vs Deaths By State:</b><br>The following scatter plot represents the number of COVID-19 cases vs total deaths reported in  different U.S. states as of 07/15/2020. Hover over the circles to see the additional details. Annotation describes that the New York state reported highest number of total deaths and cases in the United States so far.<br></p>
-    <div id="my_dataviz" style="background-color:#f8f0e1;color:rgba(177,183,241,0.09);padding:10px;border: 5px outset #101079"></div>
+    <div id="my_dataviz3" style="background-color:#f8f0e1;color:rgba(177,183,241,0.09);padding:10px;border: 5px outset #101079"></div>
     <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify"><b style="color: purple;font-size: 18px">Deaths By State:</b><br> The following bar plots represent the descending order of total COVID-19 deaths reported in U.S. states as of 07/15/2020. New York and New Jersey are the only two states where the total cumulative death counts surpassed 10,000 mark.<br></p>
-    <div id="my_dataviz1" style="background-color:#f8f0e1;color:rgba(236,241,175,0.09);padding:10px;border: 5px outset #08080e"></div>
+    <div id="my_dataviz2" style="background-color:#f8f0e1;color:rgba(236,241,175,0.09);padding:10px;border: 5px outset #08080e"></div>
     <br>
     <footer>
         <p style="background-color:aliceblue;font-family:Helvetica Neue;font-size:130%" align="justify">
@@ -124,15 +126,14 @@
 </div>
 
 <script type="text/javascript">
-        ////////////////////////////////////// Beginning of scatter plot code ////////////////////////////////////
+     ////////////////////////////////////// Beginning of scatter plot code ////////////////////////////////////
 
     // set the dimensions and margins of the graph
     var margin_scatter = {top: 10, right: 30, bottom: 30, left: 60},
         width_scatter = 1200 - margin_scatter.left - margin_scatter.right,
         height_scatter = 400 - margin_scatter.top - margin_scatter.bottom;
-    
     // append the svg object to the body of the page
-    var svg_scatter = d3.select("#my_dataviz")
+    var svg_scatter = d3.select("#my_dataviz3")
         .append("svg")
         .attr("width", width_scatter + margin_scatter.left + margin_scatter.right)
         .attr("height", height_scatter + margin_scatter.top + margin_scatter.bottom)
@@ -140,32 +141,30 @@
         .attr("transform",
             "translate(" + margin_scatter.left + "," + margin_scatter.top + ")")
 
-    //Loading the US Total no. of Cases and Deaths data
+    //Read the data
     d3.csv("data/US_CASES_DEATHS.csv", function(data) {
 
         var dataArray = [];
         for (var d = 0; d < data.length; d++) {
             dataArray.push(parseFloat(data[d].Total_Cases))
         }
-        // Setting color range based on the data array value
         var minVal = d3.min(dataArray)
         var midVal = (d3.max(dataArray) - d3.min(dataArray)) / 2
         var maxVal = d3.max(dataArray)
-       
+
         var color = d3.scaleLinear()
             .domain([minVal,midVal,maxVal])
             .range(['#4daf4a','#1a93e4','#e41a1c'])
-        
-        // Sqrt scale of the circle size
+
         var sizeScale = d3.scaleSqrt()
             .domain([minVal,maxVal])
             .range([0,30]);
 
-        // Add X axis 
+
+        // Add X axis
         var x = d3.scaleLinear()
             .domain([0, 0])
             .range([ 0, width_scatter ]);
-        
         svg_scatter.append("g")
             .attr("class", "myXaxis")   // Note that here we give a class to the X axis, to be able to call it later and modify it
             .attr("transform", "translate(0," + height_scatter + ")")
@@ -178,7 +177,7 @@
                 "translate(" + (width_scatter/2) + " ," +
                 (height_scatter + margin_scatter.top + 13) + ")")
             .style("text-anchor", "middle")
-            .text("Total Deaths");
+            .text("Total Death");
 
         // Add Y axis
         var y = d3.scaleLinear()
@@ -195,8 +194,9 @@
             .style("text-anchor", "middle")
             .text("Total Cases");
 
-        // Tooltip setting for mouseover event
-        var tooltip = d3.select("#my_dataviz").append("div")
+        // Add the tooltip container to the vis container
+        // it's invisible and its position/contents are defined during mouseover
+        var tooltip = d3.select("#my_dataviz3").append("div")
             .attr("class", "tooltip")
             .style("opacity", 0);
 
@@ -223,6 +223,54 @@
         };
 
 
+
+        // Add dots
+        svg_scatter.append('g')
+            //.call(makeAnnotationsRight)
+            .selectAll("dot")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("cx", function (d) { return x(d.Deaths); })
+            .attr("cy", function (d) { return y(d.Total_Cases); })
+            .attr("r", function (d, i) { return sizeScale(d.Total_Cases); })
+            .style("fill", function(d) { return color(d.Total_Cases); })
+            .on("mouseover", tipMouseover)
+            .on("mouseout", tipMouseout);
+
+
+        // new X axis
+        x.domain([0, 35000])
+        svg_scatter.select(".myXaxis")
+            .transition()
+            .duration(2000)
+            .attr("opacity", "1")
+            .call(d3.axisBottom(x));
+
+
+        svg_scatter.selectAll("circle")
+            .transition()
+            .delay(function(d,i){return(i*3)})
+            .duration(2000)
+            .attr("cx", function (d) { return x(d.Deaths); } )
+            .attr("cy", function (d) { return y(d.Total_Cases); })
+
+        svg_scatter.append("g")
+            .selectAll("text")
+            .data(data)
+            .enter()
+            .append("text")
+            .transition()
+            .delay(function(d,i){return(i*3)})
+            .duration(2000)
+            .text(function (d) { return d.abbr; })
+            .attr("x", function (d) { return x(d.Deaths); })
+            .attr("y", function (d) { return y(d.Total_Cases); })
+            .attr("font_family", "sans-serif")  // Font type
+            .attr("font-size", "8px")
+            .attr("text-anchor","middle")// Font size
+            .style("fill", "white");
+
         //arrow for annotation
         svg_scatter.append("svg:defs").append("svg:marker")
             .attr("id", "triangle")
@@ -245,8 +293,7 @@
             .attr("stroke-width", 2)
             .attr("stroke", "red")
             .attr("marker-end", "url(#triangle)");
-        
-        // text for annotation
+
         svg_scatter.append("text")
             .attr("x",750)
             .attr("y",125)
@@ -256,54 +303,6 @@
             .style("text-decoration", "underline")
             .text("NY state reported highest cases and deaths");
 
-
-        // Add circle dots on svg chart 
-        svg_scatter.append('g')
-            .selectAll("dot")
-            .data(data)
-            .enter()
-            .append("circle")
-            .attr("cx", function (d) { return x(d.Deaths); })
-            .attr("cy", function (d) { return y(d.Total_Cases); })
-            .attr("r", function (d, i) { return sizeScale(d.Total_Cases); })
-            .style("fill", function(d) { return color(d.Total_Cases); })
-            .on("mouseover", tipMouseover)
-            .on("mouseout", tipMouseout);
-
-
-        // X axis based on transition domain fixed based on deaths count
-        x.domain([0, 35000])
-        svg_scatter.select(".myXaxis")
-            .transition()
-            .duration(2000)
-            .attr("opacity", "1")
-            .call(d3.axisBottom(x));
-
-
-        svg_scatter.selectAll("circle")
-            .transition()
-            .delay(function(d,i){return(i*3)})
-            .duration(2000)
-            .attr("cx", function (d) { return x(d.Deaths); } )
-            .attr("cy", function (d) { return y(d.Total_Cases); })
-        
-        // add state name abbreviation to the circles as label
-        svg_scatter.append("g")
-            .selectAll("text")
-            .data(data)
-            .enter()
-            .append("text")
-            .transition()
-            .delay(function(d,i){return(i*3)})
-            .duration(2000)
-            .text(function (d) { return d.abbr; })
-            .attr("x", function (d) { return x(d.Deaths); })
-            .attr("y", function (d) { return y(d.Total_Cases); })
-            .attr("font_family", "sans-serif")  // Font type
-            .attr("font-size", "8px")
-            .attr("text-anchor","middle")// Font size
-            .style("fill", "white");
-        
         // add size legend to the svg screen
         svg_scatter.append("circle").attr("cx",1020).attr("cy",170).attr("r", 7).style("fill", "none").style("stroke", "blue")
         svg_scatter.append("circle").attr("cx",1020).attr("cy",190).attr("r", 12).style("fill", "none").style("stroke", "blue")
@@ -316,19 +315,18 @@
         svg_scatter.append("text").attr("x", 1050).attr("y", 260).text("Cases > 300000").style("font-size", "12px").attr("alignment-baseline","middle").style("fill", "blue")
         svg_scatter.append("text").attr("x", 1050).attr("y", 310).text("Cases > 400000").style("font-size", "12px").attr("alignment-baseline","middle").style("fill", "blue")
 
+
     })
 
     ////////////////////////////////////// End of scatter plot code ////////////////////////////////////
 
     ///////////////////////////////////Beginning of Deaths by state bar plot code //////////////////////
 
-    // Set width, height and margin for this chart
     var margin1 = {top: 50, right: 30, bottom: 80, left: 60},
         width1 = 1200 - margin1.left - margin1.right,
         height1 = 400 - margin1.top - margin1.bottom;
-    
     // append the svg object to the body of the page
-    var svg2 = d3.select("#my_dataviz1")
+    var svg2 = d3.select("#my_dataviz2")
         .append("svg")
         .attr("width", width1 + margin1.left + margin1.right)
         .attr("height", height1 + margin1.top + margin1.bottom)
@@ -350,7 +348,7 @@
         .attr("class", "myYaxis")
 
 
-    // Load US cases and deaths data 
+    // Parse the Data
     d3.csv("data/US_CASES_DEATHS.csv", function (data) {
 
         data.sort(function (a, b) {
@@ -388,12 +386,13 @@
             .attr("dy", "1em")
             .style("text-anchor", "middle")
             .text("Total Deaths");
+        //color.domain(data.map(function (d){ return d.Group; }));
 
         // variable u: map data to existing bars
         var u2 = svg2.selectAll("rect")
             .data(data)
 
-        // update bars to reflect the three regions based on total number of deaths 
+        // update bars
         u2
             .enter()
             .append("rect")
@@ -410,7 +409,8 @@
             .attr("height", function (d) {
                 return height1 - y_b(d.Deaths);
             })
-            // add color range per total no. of deaths
+            //.attr("fill", function(d){return colorScale(d.Group); })
+            //.attr("fill", function (d){ return color(d.State); })
             .attr("class", function (d) {
                 var s = "bar ";
                 if (d.Deaths < 5000) {
@@ -422,14 +422,14 @@
                 }
             });
 
-        // add legend 
+        // legend for the regions
 
         svg2.append("circle").attr("cx",900).attr("cy",60).attr("r", 6).style("fill", "#e3486c")
         svg2.append("circle").attr("cx",900).attr("cy",90).attr("r", 6).style("fill", "#0a81a8")
         svg2.append("circle").attr("cx",900).attr("cy",120).attr("r", 6).style("fill", "#6fec76")
-        svg2.append("text").attr("x", 920).attr("y", 60).text("Total deaths > 10000").style("font-size", "15px").attr("alignment-baseline","middle")
-        svg2.append("text").attr("x", 920).attr("y", 90).text("Total deaths < 10000").style("font-size", "15px").attr("alignment-baseline","middle")
-        svg2.append("text").attr("x", 920).attr("y", 120).text("Total deaths < 5000").style("font-size", "15px").attr("alignment-baseline","middle")
+        svg2.append("text").attr("x", 920).attr("y", 60).text("High Deaths Region").style("font-size", "15px").attr("alignment-baseline","middle")
+        svg2.append("text").attr("x", 920).attr("y", 90).text("Mid Deaths Region").style("font-size", "15px").attr("alignment-baseline","middle")
+        svg2.append("text").attr("x", 920).attr("y", 120).text("Low Deaths Region").style("font-size", "15px").attr("alignment-baseline","middle")
     })
 
     ///////////////////////////////////End of Deaths by state bar plot code //////////////////////
