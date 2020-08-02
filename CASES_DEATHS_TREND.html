@@ -182,59 +182,7 @@
             .attr("transform",
                 "translate(" + margin_daily.left + "," + margin_daily.top + ")");
 
-        //arrow
-        svg_daily.append("svg:defs").append("svg:marker")
-            .attr("id", "triangle")
-            .attr("refX", 6)
-            .attr("refY", 6)
-            .attr("markerWidth", 30)
-            .attr("markerHeight", 30)
-            .attr("markerUnits","userSpaceOnUse")
-            .attr("orient", "auto")
-            .append("path")
-            .attr("d", "M 0 0 12 6 0 12 3 6")
-            .style("fill", "red");
-
-        // circle for annotation
-
-        svg_daily.append("circle")
-            .attr("cx", 990)
-            .attr("cy", 150)
-            .attr("r", 140)
-            .style("stroke", "red")
-            .style("stroke-width",4)
-            .style("stroke-dasharray", ("3, 3"))
-            .style("fill","none");
-
-
-        //line for annotation
-        svg_daily.append("line")
-            .attr("x1", 700)
-            .attr("y1", 75)
-            .attr("x2", 840)
-            .attr("y2", 125)
-
-            .attr("stroke-width", 2)
-            .attr("stroke", "red")
-            .attr("marker-end", "url(#triangle)");
-
-        svg_daily.append("text")
-            .attr("x",485)
-            .attr("y",60)
-            .attr("font-family","sans-serif")
-            .attr("font-size",12)
-            .style("fill", "red")
-            .style("text-decoration", "underline")
-            .text("COVID-19 cases surge in U.S. since mid-June,")
-
-        svg_daily.append("text")
-            .attr("x",485)
-            .attr("y",75)
-            .attr("font-family","sans-serif")
-            .attr("font-size",12)
-            .style("fill", "green")
-            .style("text-decoration", "underline")
-            .text("however the fatality rate improved");
+     
 
         // Initialize the X axis
         var x = d3.scaleBand()
@@ -276,7 +224,7 @@
 
 
                 // variable u: map data to existing bars
-                var u3 = svg_daily.selectAll("rect")
+                var u = svg_daily.selectAll("rect")
                     .data(data)
                     .on("mouseover", function(d) {
                         var html  = "<span><b> Date : </b>" + d.Date+ "</span><br/>" +
@@ -301,7 +249,7 @@
                     })
 
                 // update bars
-                u3
+                u
                     .enter()
                     .append("rect")
                     .merge(u3)
@@ -312,6 +260,64 @@
                     .attr("width", x.bandwidth())
                     .attr("height", function(d) { return height_daily - y(d[selectedVar]); })
                     .attr("fill", "#69b3a2")
+                
+                // circle for annotation
+
+                svg_daily.append("circle")
+                    .attr("cx", 990)
+                    .attr("cy", 150)
+                    .attr("r", 140)
+                    .style("stroke", function (d) {if (selectedVar == 'Cases') {return "red";}
+                    else if (selectedVar == 'Average_7Day_Cases') {return "mediumvioletred";}
+                    else return "green"; })
+                    .style("stroke-width",4)
+                    .style("stroke-dasharray", ("3, 3"))
+                    .style("fill","none");
+
+                //line for annotation
+                svg_daily.append("line")
+                    .attr("x1", 700)
+                    .attr("y1", 80)
+                    .attr("x2", 850)
+                    .attr("y2", 130)
+                    .attr("stroke-width", 2)
+                    //.attr("stroke", "red")
+                    .style("stroke", function (d) {if (selectedVar == 'Cases') {return "red";}
+                    else if (selectedVar == 'Average_7Day_Cases') {return "mediumvioletred";}
+                    else return "green"; })
+                    .attr("marker-end", "url(#triangle)");
+
+                //remove previous state of annotation
+                svg_daily.selectAll(".annotation").remove();
+
+                // text for annotation
+                svg_daily.append("text")
+                    .attr("class","annotation")
+                    .attr("x",485)
+                    .attr("y",75)
+                    .attr("font-family","sans-serif")
+                    .attr("font-size",12)
+                    //.style("fill", "green")
+                    .style("fill", function (d) {if (selectedVar == 'Cases') {return "red";}
+                    else if (selectedVar == 'Average_7Day_Cases') {return "mediumvioletred";}
+                    else return "green"; })
+                    .style("text-decoration", "underline")
+                    .text(function (d) { if (selectedVar == 'Cases')
+                    {
+                        words =  "COVID-19 cases surge in U.S. since mid-June";
+                    }
+
+                    else if (selectedVar == 'Average_7Day_Cases')
+                    {
+                        words = "Average 7-day cases surge in U.S. since mid-June";
+                    }
+
+                    else
+                    {
+                        words = "COVID-19 Mortality rate improved since mid-June";
+                    }
+                        return words;
+                    });
 
 
 
@@ -418,24 +424,11 @@
                 .style("stroke-dasharray", ("3, 3"))
                 .style("fill","none");
 
-            //arrow for annotation
-            svg.append("svg:defs").append("svg:marker")
-                .attr("id", "triangle")
-                .attr("refX", 6)
-                .attr("refY", 6)
-                .attr("markerWidth", 30)
-                .attr("markerHeight", 30)
-                .attr("markerUnits","userSpaceOnUse")
-                .attr("orient", "auto")
-                .append("path")
-                .attr("d", "M 0 0 12 6 0 12 3 6")
-                .style("fill", "red");
-
             //line for annotation
             svg.append("line")
                 .attr("x1",  300)
                 .attr("y1", 30)
-                .attr("x2", 650)
+                .attr("x2", 660)
                 .attr("y2", 100)
 
                 .attr("stroke-width", 1)
